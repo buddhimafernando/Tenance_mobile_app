@@ -56,14 +56,14 @@ class _MarkAsCompleteDialogWidgetState
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
             child: Icon(
               Icons.error_outline,
-              color: FlutterFlowTheme.of(context).error,
+              color: const Color.fromARGB(255, 0, 147, 7),
               size: 24.0,
             ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Text(
-              'Do you want to mark this as an incomplete maintenance request?',
+              'Do you want to mark this request as completed?',
               style: FlutterFlowTheme.of(context).displayMedium.override(
                     fontFamily: 'Inter',
                     letterSpacing: 0.0,
@@ -73,7 +73,7 @@ class _MarkAsCompleteDialogWidgetState
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Text(
-              'If you mark this as an incomplete maintenance request, the agent will review this',
+              'If you mark this maintenance request as completed, all processes will stop.',
               style: FlutterFlowTheme.of(context).labelMedium.override(
                     fontFamily: 'Inter',
                     letterSpacing: 0.0,
@@ -116,9 +116,9 @@ class _MarkAsCompleteDialogWidgetState
                     model: _model.customButtonModel2,
                     updateCallback: () => safeSetState(() {}),
                     child: CustomButtonWidget(
-                      buttonLabel: 'Cancel',
-                      buttonColor: FlutterFlowTheme.of(context).error,
-                      borderColor: FlutterFlowTheme.of(context).error,
+                      buttonLabel: 'Yes',
+                      buttonColor: FlutterFlowTheme.of(context).primary,
+                      borderColor: FlutterFlowTheme.of(context).primary,
                       routeTo: () async {},
                     ),
                   ),

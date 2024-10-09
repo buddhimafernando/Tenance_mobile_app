@@ -48,7 +48,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
           leading: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 8.0,
@@ -87,7 +88,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
@@ -106,7 +108,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: wrapWithModel(
                     model: _model.labelAndContentModel3,
                     updateCallback: () => safeSetState(() {}),
@@ -118,7 +121,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Images',
                     style: FlutterFlowTheme.of(context).displayLarge.override(
@@ -128,8 +132,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 20.0),
                   child: Container(
                     width: double.infinity,
                     height: 292.0,
@@ -148,7 +152,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 0.0, 20.0),
                   child: Text(
                     'Available times',
                     style: FlutterFlowTheme.of(context).displayLarge.override(
@@ -158,7 +163,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -188,7 +194,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 0.0, 0.0),
                   child: Text(
                     'Status',
                     style: FlutterFlowTheme.of(context).displayLarge.override(
@@ -198,8 +205,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 10.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -224,7 +231,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 10.0, 0.0, 0.0),
                   child: Text(
                     'Status',
                     style: FlutterFlowTheme.of(context).displayLarge.override(
@@ -234,8 +242,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 10.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -244,16 +252,21 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/proflow-plumbing.png',
-                              fit: BoxFit.cover,
+                          InkWell(
+                            onTap: () {
+                              context.pushNamed('maintenance_provider_profile');
+                            },
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(
+                                'assets/images/proflow-plumbing.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Column(
@@ -319,8 +332,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 40.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 40.0, 20.0, 40.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -341,13 +354,15 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                                       elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
-                                      alignment: const AlignmentDirectional(0.0, 0.0)
+                                      alignment: const AlignmentDirectional(
+                                              0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: GestureDetector(
                                         onTap: () =>
                                             FocusScope.of(dialogContext)
                                                 .unfocus(),
-                                        child: const MarkAsIncompleteDialogWidget(),
+                                        child:
+                                            const MarkAsIncompleteDialogWidget(),
                                       ),
                                     );
                                   },
@@ -372,13 +387,15 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                                       elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
-                                      alignment: const AlignmentDirectional(0.0, 0.0)
+                                      alignment: const AlignmentDirectional(
+                                              0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: GestureDetector(
                                         onTap: () =>
                                             FocusScope.of(dialogContext)
                                                 .unfocus(),
-                                        child: const MarkAsCompleteDialogWidget(),
+                                        child:
+                                            const MarkAsCompleteDialogWidget(),
                                       ),
                                     );
                                   },

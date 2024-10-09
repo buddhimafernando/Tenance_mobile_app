@@ -153,21 +153,27 @@ class _PendingRequestCardWidgetState extends State<PendingRequestCardWidget> {
                                 size: 15.0,
                               ),
                               onPressed: () {
-                                print('IconButton pressed ...');
+                                context.pop();
                               },
                             ),
                           ),
                         ),
                       ],
                     ),
-                    Text(
-                      'View request',
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).primary,
-                            letterSpacing: 0.0,
-                            decoration: TextDecoration.underline,
-                          ),
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed('pending_request');
+                      },
+                      child: Text(
+                        'View request',
+                        style:
+                            FlutterFlowTheme.of(context).displaySmall.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                      ),
                     ),
                   ],
                 ),

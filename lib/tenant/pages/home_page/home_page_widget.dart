@@ -346,6 +346,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     updateCallback: () => safeSetState(() {}),
                     child: const HorizontalCarousalWidget(
                       requestType: 'Plumbing maintenance',
+                      name: "David Wilson",
                     ),
                   ),
                 ),
@@ -387,7 +388,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            alignment: const AlignmentDirectional(5.0, 0.0),
                             child: FlutterFlowChartLegendWidget(
                               entries: FFAppState()
                                   .requestTypes

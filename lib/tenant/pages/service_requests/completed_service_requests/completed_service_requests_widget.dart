@@ -72,7 +72,8 @@ class _CompletedServiceRequestsWidgetState
               leading: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                   child: FlutterFlowIconButton(
                     borderColor: Colors.transparent,
                     borderRadius: 8.0,
@@ -85,7 +86,7 @@ class _CompletedServiceRequestsWidgetState
                       size: 20.0,
                     ),
                     onPressed: () async {
-                      context.pop();
+                      context.pushNamed('homePage');
                     },
                   ),
                 ),
@@ -93,7 +94,8 @@ class _CompletedServiceRequestsWidgetState
               title: Align(
                 alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
                   child: Text(
                     'Service requests',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -110,7 +112,8 @@ class _CompletedServiceRequestsWidgetState
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -122,8 +125,19 @@ class _CompletedServiceRequestsWidgetState
                           ChipData('Completed'),
                           ChipData('Rejected')
                         ],
-                        onChanged: (val) => safeSetState(
-                            () => _model.choiceChipsValue = val?.firstOrNull),
+                        onChanged: (val) async {
+                          final selectedStatus = val?.firstOrNull;
+                          if (selectedStatus != null) {
+                            // Route to the relevant screen based on the selected chip
+                            if (selectedStatus == 'Pending') {
+                              context.pushNamed('pending_service_requests');
+                            } else if (selectedStatus == 'Ongoing') {
+                              context.pushNamed('ongoing_service_requests');
+                            } else if (selectedStatus == 'Rejected') {
+                              context.pushNamed('RejectedRequestsPage');
+                            }
+                          }
+                        },
                         selectedChipStyle: ChipStyle(
                           backgroundColor: FlutterFlowTheme.of(context).primary,
                           textStyle:

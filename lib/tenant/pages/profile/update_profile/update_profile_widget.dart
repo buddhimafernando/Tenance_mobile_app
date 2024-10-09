@@ -63,7 +63,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
             leading: Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderRadius: 8.0,
                   buttonSize: 40.0,
@@ -74,6 +75,7 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                     size: 20.0,
                   ),
                   onPressed: () {
+                    context.pop();
                     print('IconButton pressed ...');
                   },
                 ),
@@ -123,8 +125,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 10.0, 0.0, 0.0),
                     child: Text(
                       widget.userName,
                       style:
@@ -150,7 +152,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customTextfieldModel1,
                     updateCallback: () => safeSetState(() {}),
@@ -188,7 +191,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 20.0),
                   child: wrapWithModel(
                     model: _model.customButtonModel,
                     updateCallback: () => safeSetState(() {}),

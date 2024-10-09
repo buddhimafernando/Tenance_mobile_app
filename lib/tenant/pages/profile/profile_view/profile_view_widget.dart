@@ -63,7 +63,8 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
             leading: Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderRadius: 8.0,
                   buttonSize: 40.0,
@@ -74,7 +75,7 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                     size: 20.0,
                   ),
                   onPressed: () {
-                    print('IconButton pressed ...');
+                    context.pushNamed('homePage');
                   },
                 ),
               ),
@@ -121,8 +122,8 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 10.0, 0.0, 0.0),
                     child: Text(
                       widget.userName,
                       style:
@@ -148,7 +149,8 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
@@ -186,8 +188,8 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customButtonModel,
                     updateCallback: () => safeSetState(() {}),
@@ -196,7 +198,9 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                       buttonColor: FlutterFlowTheme.of(context).alternate,
                       borderColor: FlutterFlowTheme.of(context).secondary,
                       labelColor: FlutterFlowTheme.of(context).secondary,
-                      routeTo: () async {},
+                      routeTo: () async {
+                        context.pushNamed('update_profile');
+                      },
                     ),
                   ),
                 ),

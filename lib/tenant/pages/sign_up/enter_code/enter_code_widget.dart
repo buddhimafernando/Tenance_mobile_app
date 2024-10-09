@@ -68,8 +68,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 20.0, 0.0, 0.0),
                     child: Text(
                       'Enter code',
                       style:
@@ -83,8 +83,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 10.0, 20.0, 0.0),
                     child: Text(
                       'We’ve sent an email with an activation code to your email address, helloworld@gmail.com',
                       style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -96,8 +96,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 40.0, 20.0, 0.0),
                   child: PinCodeTextField(
                     autoDisposeControllers: false,
                     appContext: context,
@@ -117,22 +117,24 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                     hintCharacter: '-',
                     keyboardType: TextInputType.number,
                     pinTheme: PinTheme(
-                      fieldHeight: 50.0,
-                      fieldWidth: 50.0,
-                      borderWidth: 1.0,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(8.0),
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(8.0),
-                      ),
-                      shape: PinCodeFieldShape.box,
-                      activeColor: FlutterFlowTheme.of(context).secondary,
-                      inactiveColor: FlutterFlowTheme.of(context).tertiary,
-                      selectedColor: FlutterFlowTheme.of(context).secondary,
-                      activeFillColor: FlutterFlowTheme.of(context).alternate,
-                      selectedFillColor: FlutterFlowTheme.of(context).alternate,
-                    ),
+                        fieldHeight: 50.0,
+                        fieldWidth: 50.0,
+                        borderWidth: 1.0,
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(8.0),
+                          bottomRight: Radius.circular(8.0),
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0),
+                        ),
+                        shape: PinCodeFieldShape.box,
+                        activeColor: FlutterFlowTheme.of(context).secondary,
+                        inactiveColor: FlutterFlowTheme.of(context).tertiary,
+                        selectedColor: FlutterFlowTheme.of(context).secondary,
+                        activeFillColor: FlutterFlowTheme.of(context).alternate,
+                        selectedFillColor:
+                            FlutterFlowTheme.of(context).alternate,
+                        inactiveFillColor:
+                            FlutterFlowTheme.of(context).alternate),
                     controller: _model.pinCodeController,
                     onChanged: (_) {},
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -143,8 +145,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 10.0, 20.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -173,8 +175,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 20.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customButtonModel,
                     updateCallback: () => safeSetState(() {}),

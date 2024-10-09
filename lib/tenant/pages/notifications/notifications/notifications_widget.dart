@@ -44,7 +44,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
           leading: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 8.0,
@@ -57,7 +58,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   size: 20.0,
                 ),
                 onPressed: () async {
-                  context.pop();
+                  context.pushNamed('home_page');
                 },
               ),
             ),
@@ -65,7 +66,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
           title: Align(
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 60.0, 0.0),
               child: Text(
                 'Notifications',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(

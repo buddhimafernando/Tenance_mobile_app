@@ -86,7 +86,7 @@ class _PendingServiceRequestsWidgetState
                       size: 20.0,
                     ),
                     onPressed: () async {
-                      context.pop();
+                      context.pushNamed('homePage');
                     },
                   ),
                 ),
@@ -126,8 +126,19 @@ class _PendingServiceRequestsWidgetState
                           ChipData('Completed'),
                           ChipData('Rejected')
                         ],
-                        onChanged: (val) => safeSetState(
-                            () => _model.choiceChipsValue = val?.firstOrNull),
+                        onChanged: (val) async {
+                          final selectedStatus = val?.firstOrNull;
+                          if (selectedStatus != null) {
+                            // Route to the relevant screen based on the selected chip
+                            if (selectedStatus == 'Ongoing') {
+                              context.pushNamed('ongoing_service_requests');
+                            } else if (selectedStatus == 'Completed') {
+                              context.pushNamed('completed_service_requests');
+                            } else if (selectedStatus == 'Rejected') {
+                              context.pushNamed('RejectedRequestsPage');
+                            }
+                          }
+                        },
                         selectedChipStyle: ChipStyle(
                           backgroundColor: FlutterFlowTheme.of(context).primary,
                           textStyle:
