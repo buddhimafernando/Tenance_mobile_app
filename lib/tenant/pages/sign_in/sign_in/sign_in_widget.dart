@@ -27,9 +27,9 @@ class _SignInWidgetState extends State<SignInWidget> {
     _model = createModel(context, () => SignInModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('reset_password');
-    });
+    // SchedulerBinding.instance.addPostFrameCallback((_) async {
+    //   context.pushNamed('reset_password');
+    // });
   }
 
   @override

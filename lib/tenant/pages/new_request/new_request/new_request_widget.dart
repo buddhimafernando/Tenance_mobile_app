@@ -55,7 +55,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
           leading: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
               child: FlutterFlowIconButton(
                 borderRadius: 8.0,
                 buttonSize: 40.0,
@@ -66,7 +67,7 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   size: 20.0,
                 ),
                 onPressed: () {
-                  print('IconButton pressed ...');
+                  context.pop();
                 },
               ),
             ),
@@ -74,7 +75,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
           title: Align(
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 50.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 50.0, 0.0),
               child: Text(
                 'New request',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -95,7 +97,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customTextfieldModel1,
                     updateCallback: () => safeSetState(() {}),
@@ -116,8 +119,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Upload image',
                       style:
@@ -129,7 +132,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.uploadImageModel,
                     updateCallback: () => safeSetState(() {}),
@@ -137,7 +141,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customTextfieldModel2,
                     updateCallback: () => safeSetState(() {}),
@@ -151,8 +156,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 20.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 10.0, 0.0, 20.0),
                     child: Text(
                       'Times you are available at home',
                       style:
@@ -164,7 +169,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.dateTimeFieldModel1,
                     updateCallback: () => safeSetState(() {}),
@@ -175,7 +181,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.dateTimeFieldModel2,
                     updateCallback: () => safeSetState(() {}),
@@ -185,7 +192,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.dateTimeFieldModel3,
                     updateCallback: () => safeSetState(() {}),
@@ -195,7 +203,8 @@ class _NewRequestWidgetState extends State<NewRequestWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 0.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customButtonModel,
                     updateCallback: () => safeSetState(() {}),
