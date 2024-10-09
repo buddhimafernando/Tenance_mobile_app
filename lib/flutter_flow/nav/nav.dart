@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tenance_mobile_app/tenant/pages/maintenance_provider_profile/maintenance_provider_profile_widget.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -72,14 +73,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? const NavBarPage()
+          : const SplashScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? const NavBarPage()
+              : const SplashScreenWidget(),
         ),
         FFRoute(
           name: 'homePage',
@@ -292,7 +295,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ongoing_request',
           path: '/ongoingRequest',
           builder: (context, params) => const OngoingRequestWidget(),
-        )
+        ),
+        FFRoute(
+          name: 'maintenance_provider_profile',
+          path: '/maintenanceProviderProfile',
+          builder: (context, params) =>
+              const MaintenanceProviderProfileWidget(),
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -527,7 +536,8 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() =>
+      const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

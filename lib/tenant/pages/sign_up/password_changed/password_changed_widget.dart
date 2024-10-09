@@ -86,7 +86,7 @@ class _PasswordChangedWidgetState extends State<PasswordChangedWidget> {
                   child: CustomButtonWidget(
                     buttonLabel: 'Back to login',
                     routeTo: () async {
-                      context.pushNamed('homePage');
+                      context.pushNamed('sign_in');
                     },
                   ),
                 ),

@@ -72,7 +72,7 @@ class _IconLabelButtonWidgetState extends State<IconLabelButtonWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Text(
               widget.iconLabel,
               style: FlutterFlowTheme.of(context).displayMedium.override(

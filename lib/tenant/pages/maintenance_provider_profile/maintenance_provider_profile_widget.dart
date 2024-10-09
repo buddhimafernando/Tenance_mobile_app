@@ -55,7 +55,8 @@ class _MaintenanceProviderProfileWidgetState
           backgroundColor: FlutterFlowTheme.of(context).alternate,
           automaticallyImplyLeading: false,
           leading: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 10.0),
+            padding:
+                const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 10.0),
             child: FlutterFlowIconButton(
               borderRadius: 8.0,
               buttonSize: 40.0,
@@ -66,6 +67,7 @@ class _MaintenanceProviderProfileWidgetState
                 size: 20.0,
               ),
               onPressed: () {
+                context.pop();
                 print('IconButton pressed ...');
               },
             ),
@@ -87,53 +89,50 @@ class _MaintenanceProviderProfileWidgetState
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          width: 165.0,
-                          height: 251.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).alternate,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              widget.workerImage,
-                              width: 270.0,
-                              height: 169.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    child: Container(
+                      width: 165.0,
+                      height: 251.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          "https://thumbs.dreamstime.com/b/plumbing-service-logo-blue-symbol-white-text-vector-illustration-126377940.jpg",
+                          // width: 270.0,
+                          height: 169.0,
+                          fit: BoxFit.cover,
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 0.0, 0.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsetsDirectional.fromSTEB(
+                    //       10.0, 0.0, 0.0, 0.0),
+                    //   child: Column(
+                    //     mainAxisSize: MainAxisSize.max,
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //   ),
+                    // ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 20.0, 0.0, 20.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 10.0, 0.0),
+                              0.0, 0.0, 0.0, 0.0),
                           child: wrapWithModel(
                             model: _model.iconLabelButtonModel1,
                             updateCallback: () => safeSetState(() {}),
@@ -197,24 +196,23 @@ class _MaintenanceProviderProfileWidgetState
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'About',
-                      content:
-                          'Hi, I\'m Steeve, your friendly neighborhood plumber with over 11 years of experience in fixing leaks, unclogging drains, and keeping your pipes in top shape. I\'m dedicated to providing reliable and efficient plumbing services to ensure your home\'s comfort and safety.',
+                      label: 'Agreement Id',
+                      content: '127812974934',
                     ),
                   ),
                   wrapWithModel(
                     model: _model.labelAndContentModel2,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'Location',
-                      content: 'Burmingham',
+                      label: 'Service provider id',
+                      content: '6758477487',
                     ),
                   ),
                   wrapWithModel(
                     model: _model.labelAndContentModel3,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'Professional title',
+                      label: 'Provided services',
                       content: 'Licenced plumber',
                     ),
                   ),
@@ -222,25 +220,16 @@ class _MaintenanceProviderProfileWidgetState
                     model: _model.labelAndContentModel4,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'Languages spoken',
-                      content: 'Fluent in english and spanish',
+                      label: 'Mobile number',
+                      content: '+9484738534',
                     ),
                   ),
                   wrapWithModel(
                     model: _model.labelAndContentModel5,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'Availibility',
-                      content:
-                          'Available Monday through Friday, 8:00 AM to 5:00 PM. Emergency services available evenings and weekends.',
-                    ),
-                  ),
-                  wrapWithModel(
-                    model: _model.labelAndContentModel6,
-                    updateCallback: () => safeSetState(() {}),
-                    child: const LabelAndContentWidget(
-                      label: 'Experience',
-                      content: '10+ years',
+                      label: 'Email',
+                      content: 'yahyasateha@gmail.com',
                     ),
                   ),
                 ],
