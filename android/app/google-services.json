@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647835449620",
+    "project_id": "test-25085",
+    "storage_bucket": "test-25085.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647835449620:android:51e9c92bc0e3f59cdc2a01",
+        "android_client_info": {
+          "package_name": "com.mycompany.tenancemobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM8RBX_yJaYHsWi6wv646XD7IsClp3Azk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
