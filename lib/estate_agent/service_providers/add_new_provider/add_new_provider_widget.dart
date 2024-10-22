@@ -24,6 +24,8 @@ class _AddNewProviderWidgetState extends State<AddNewProviderWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AddNewProviderModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -126,6 +126,119 @@ class FindAllCompletedServiceRequestsCall {
       ));
 }
 
+class FindTenantDetailsCall {
+  static Future<ApiCallResponse> call({
+    String? tenantId = '12345',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'findTenantDetails',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/tenantmanagement-app1175/find/tenant',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'tenantId': tenantId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? agreementId(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.AgreementId''',
+      ));
+}
+
+class CreateMaintainenanceRequestCall {
+  static Future<ApiCallResponse> call({
+    String? maintenanceRequestId = '',
+    String? maintenanceType = '',
+    String? description = '',
+    String? availableTime = '',
+    String? images = '',
+    String? tenantId = '',
+    String? propertyId = '',
+    bool? deleted,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "MaintenanceRequestId": "$maintenanceRequestId",
+  "MaintenanceType": "$maintenanceType",
+  "Notes": "$description",
+  "AvailableTime": "$availableTime",
+  "Images": [
+    "$images"
+  ],
+  "TenantId": "$tenantId",
+  "PropertyId": "$propertyId",
+  "Deleted": $deleted
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'createMaintainenanceRequest',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/maintenancemanagement-app1172/create/maintenancerequest',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreateInquiryCall {
+  static Future<ApiCallResponse> call({
+    String? inquiryId = '',
+    String? name = '',
+    String? email = '',
+    String? phonenumber = '',
+    String? message = '',
+    String? tenantId = '',
+    String? propertyId = '',
+    bool? deleted,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "InquiryId": "$inquiryId",
+  "FullName": "$name",
+  "Email": "$email",
+  "PhoneNumber": "$phonenumber",
+  "Message": "$message",
+  "TenantId": "$tenantId",
+  "PropertyId": "$propertyId",
+  "Deleted": $deleted
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'createInquiry',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/tenantmanagement-app1175/create/inquiry',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

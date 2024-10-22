@@ -21,6 +21,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SplashScreenModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -67,28 +69,26 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Spacer(),
                     Align(
                       alignment: const AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 300.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            width: 290.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
-                            alignment: const Alignment(0.0, 0.0),
-                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          width: 290.0,
+                          height: 200.0,
+                          fit: BoxFit.contain,
+                          alignment: const Alignment(0.0, 0.0),
                         ),
                       ),
                     ),
+                    const Spacer(),
                     Align(
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 180.0, 20.0, 0.0),
+                            20.0, 0.0, 20.0, 50.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,

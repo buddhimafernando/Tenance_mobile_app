@@ -24,6 +24,8 @@ class _IconButtonWidgetState extends State<IconButtonWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IconButtonModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

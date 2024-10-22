@@ -32,6 +32,8 @@ class _LabelAndContentWidgetState extends State<LabelAndContentWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LabelAndContentModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

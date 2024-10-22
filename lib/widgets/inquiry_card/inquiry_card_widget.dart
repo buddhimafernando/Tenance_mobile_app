@@ -31,6 +31,8 @@ class _InquiryCardWidgetState extends State<InquiryCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InquiryCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

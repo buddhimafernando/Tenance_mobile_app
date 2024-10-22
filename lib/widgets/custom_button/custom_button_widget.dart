@@ -44,6 +44,8 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CustomButtonModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

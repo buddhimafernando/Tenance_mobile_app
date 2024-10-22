@@ -23,6 +23,8 @@ class _InquiryViewWidgetState extends State<InquiryViewWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => InquiryViewModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

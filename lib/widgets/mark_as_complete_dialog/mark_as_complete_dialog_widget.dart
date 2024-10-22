@@ -28,6 +28,8 @@ class _MarkAsCompleteDialogWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => MarkAsCompleteDialogModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,11 +54,11 @@ class _MarkAsCompleteDialogWidgetState
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+          const Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
             child: Icon(
               Icons.error_outline,
-              color: FlutterFlowTheme.of(context).error,
+              color: Color(0xFF238400),
               size: 24.0,
             ),
           ),
@@ -116,9 +118,9 @@ class _MarkAsCompleteDialogWidgetState
                     model: _model.customButtonModel2,
                     updateCallback: () => safeSetState(() {}),
                     child: CustomButtonWidget(
-                      buttonLabel: 'Cancel',
-                      buttonColor: FlutterFlowTheme.of(context).error,
-                      borderColor: FlutterFlowTheme.of(context).error,
+                      buttonLabel: 'Yes',
+                      buttonColor: FlutterFlowTheme.of(context).primary,
+                      borderColor: FlutterFlowTheme.of(context).primary,
                       routeTo: () async {},
                     ),
                   ),

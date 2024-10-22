@@ -22,6 +22,8 @@ class _ServiceCategoryWidgetState extends State<ServiceCategoryWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ServiceCategoryModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

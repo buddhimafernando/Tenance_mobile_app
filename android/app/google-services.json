@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "647835449620",
-    "project_id": "test-25085",
-    "storage_bucket": "test-25085.appspot.com"
+    "project_number": "593458727243",
+    "project_id": "ants-13ab5",
+    "storage_bucket": "ants-13ab5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:647835449620:android:51e9c92bc0e3f59cdc2a01",
+        "mobilesdk_app_id": "1:593458727243:android:d9e836872218a612dcc0ce",
         "android_client_info": {
           "package_name": "com.mycompany.tenancemobileapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAM8RBX_yJaYHsWi6wv646XD7IsClp3Azk"
+          "current_key": "AIzaSyC-hO_p8iheFL_HG8-K6cyCweYyfpMlVH0"
         }
       ],
       "services": {

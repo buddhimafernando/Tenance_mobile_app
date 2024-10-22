@@ -39,6 +39,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => UpdateProfileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -188,7 +190,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
                   child: wrapWithModel(
                     model: _model.customButtonModel,
                     updateCallback: () => safeSetState(() {}),

@@ -28,6 +28,8 @@ class _MarkAsIncompleteDialogWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => MarkAsIncompleteDialogModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -116,7 +118,7 @@ class _MarkAsIncompleteDialogWidgetState
                     model: _model.customButtonModel2,
                     updateCallback: () => safeSetState(() {}),
                     child: CustomButtonWidget(
-                      buttonLabel: 'Cancel',
+                      buttonLabel: 'Yes',
                       buttonColor: FlutterFlowTheme.of(context).error,
                       borderColor: FlutterFlowTheme.of(context).error,
                       routeTo: () async {},

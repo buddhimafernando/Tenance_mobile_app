@@ -22,6 +22,8 @@ class _ServiceWorkersWidgetState extends State<ServiceWorkersWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ServiceWorkersModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

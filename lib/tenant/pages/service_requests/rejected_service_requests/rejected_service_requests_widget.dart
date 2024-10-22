@@ -26,6 +26,8 @@ class _RejectedServiceRequestsWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => RejectedServiceRequestsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -148,6 +150,7 @@ class _RejectedServiceRequestsWidgetState
                       request: 'Plumbing mainatinence',
                       content:
                           'Dripping faucet in bathroom, wasting water, causing annoyance. Urgent fix needed to conserve precious resources and prevent potential water damage.....',
+                      navigateTo: () async {},
                       popUp: () async {},
                     ),
                   ),

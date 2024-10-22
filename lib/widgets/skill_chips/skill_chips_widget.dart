@@ -45,6 +45,8 @@ class _SkillChipsWidgetState extends State<SkillChipsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SkillChipsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

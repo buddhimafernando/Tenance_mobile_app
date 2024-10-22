@@ -48,6 +48,8 @@ class _AvailableTimeChipWidgetState extends State<AvailableTimeChipWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AvailableTimeChipModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

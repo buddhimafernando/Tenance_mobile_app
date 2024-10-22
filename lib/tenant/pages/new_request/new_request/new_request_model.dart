@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_dropdown/custom_dropdown_widget.dart';
@@ -8,46 +9,59 @@ import 'new_request_widget.dart' show NewRequestWidget;
 import 'package:flutter/material.dart';
 
 class NewRequestModel extends FlutterFlowModel<NewRequestWidget> {
+  ///  Local state fields for this page.
+
+  List<String> dropDown = ['Hi', 'Hello', 'wanakkam'];
+  void addToDropDown(String item) => dropDown.add(item);
+  void removeFromDropDown(String item) => dropDown.remove(item);
+  void removeAtIndexFromDropDown(int index) => dropDown.removeAt(index);
+  void insertAtIndexInDropDown(int index, String item) =>
+      dropDown.insert(index, item);
+  void updateDropDownAtIndex(int index, Function(String) updateFn) =>
+      dropDown[index] = updateFn(dropDown[index]);
+
   ///  State fields for stateful widgets in this page.
 
-  // Model for custom_textfield component.
-  late CustomTextfieldModel customTextfieldModel1;
-  // Model for custom_dropdown component.
-  late CustomDropdownModel customDropdownModel;
+  // Model for property_id.
+  late CustomTextfieldModel propertyIdModel;
+  // Model for maintenance_type.
+  late CustomDropdownModel maintenanceTypeModel;
   // Model for upload_image component.
   late UploadImageModel uploadImageModel;
-  // Model for custom_textfield component.
-  late CustomTextfieldModel customTextfieldModel2;
-  // Model for date_time_field component.
-  late DateTimeFieldModel dateTimeFieldModel1;
-  // Model for date_time_field component.
-  late DateTimeFieldModel dateTimeFieldModel2;
-  // Model for date_time_field component.
-  late DateTimeFieldModel dateTimeFieldModel3;
+  // Model for note.
+  late CustomTextfieldModel noteModel;
+  // Model for availableTime1.
+  late DateTimeFieldModel availableTime1Model;
+  // Model for availableTime2.
+  late DateTimeFieldModel availableTime2Model;
+  // Model for availableTime3.
+  late DateTimeFieldModel availableTime3Model;
   // Model for custom_button component.
   late CustomButtonModel customButtonModel;
+  // Stores action output result for [Backend Call - API (createMaintainenanceRequest)] action in custom_button widget.
+  ApiCallResponse? apiResultui8;
 
   @override
   void initState(BuildContext context) {
-    customTextfieldModel1 = createModel(context, () => CustomTextfieldModel());
-    customDropdownModel = createModel(context, () => CustomDropdownModel());
+    propertyIdModel = createModel(context, () => CustomTextfieldModel());
+    maintenanceTypeModel = createModel(context, () => CustomDropdownModel());
     uploadImageModel = createModel(context, () => UploadImageModel());
-    customTextfieldModel2 = createModel(context, () => CustomTextfieldModel());
-    dateTimeFieldModel1 = createModel(context, () => DateTimeFieldModel());
-    dateTimeFieldModel2 = createModel(context, () => DateTimeFieldModel());
-    dateTimeFieldModel3 = createModel(context, () => DateTimeFieldModel());
+    noteModel = createModel(context, () => CustomTextfieldModel());
+    availableTime1Model = createModel(context, () => DateTimeFieldModel());
+    availableTime2Model = createModel(context, () => DateTimeFieldModel());
+    availableTime3Model = createModel(context, () => DateTimeFieldModel());
     customButtonModel = createModel(context, () => CustomButtonModel());
   }
 
   @override
   void dispose() {
-    customTextfieldModel1.dispose();
-    customDropdownModel.dispose();
+    propertyIdModel.dispose();
+    maintenanceTypeModel.dispose();
     uploadImageModel.dispose();
-    customTextfieldModel2.dispose();
-    dateTimeFieldModel1.dispose();
-    dateTimeFieldModel2.dispose();
-    dateTimeFieldModel3.dispose();
+    noteModel.dispose();
+    availableTime1Model.dispose();
+    availableTime2Model.dispose();
+    availableTime3Model.dispose();
     customButtonModel.dispose();
   }
 }

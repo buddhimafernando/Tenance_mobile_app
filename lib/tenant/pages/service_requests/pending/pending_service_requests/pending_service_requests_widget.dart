@@ -27,6 +27,8 @@ class _PendingServiceRequestsWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => PendingServiceRequestsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -192,12 +194,94 @@ class _PendingServiceRequestsWidgetState
                                 child: PendingRequestCardWidget(
                                   key: Key(
                                       'Keyods_${pendingRequestsIndex}_of_${pendingRequests.length}'),
+                                  request: 'Plumbing Maintenance',
                                   content: getJsonField(
                                     pendingRequestsItem,
-                                    r'''$.RequestDescription''',
+                                    r'''$.MaintenanceRequest.Notes''',
                                   ).toString(),
+                                  navigateTo: () async {
+                                    context.pushNamed(
+                                      'pending_request',
+                                      queryParameters: {
+                                        'tenant': serializeParam(
+                                          getJsonField(
+                                            pendingRequestsItem,
+                                            r'''$.MaintenanceRequest.TenantId''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'tenantId': serializeParam(
+                                          getJsonField(
+                                            pendingRequestsItem,
+                                            r'''$.MaintenanceRequest.TenantId''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'description': serializeParam(
+                                          getJsonField(
+                                            pendingRequestsItem,
+                                            r'''$.MaintenanceRequest.Notes''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'images': serializeParam(
+                                          '',
+                                          ParamType.String,
+                                        ),
+                                        'availableTime': serializeParam(
+                                          getJsonField(
+                                            pendingRequestsItem,
+                                            r'''$.MaintenanceRequest.AvailableTime''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
                                   popUp: () async {
-                                    context.pushNamed('pending_request');
+                                    context.pushNamed(
+                                      'pending_request',
+                                      queryParameters: {
+                                        'description': serializeParam(
+                                          getJsonField(
+                                            pendingServiceRequestsFindAllPendingServiceRequestResponse
+                                                .jsonBody,
+                                            r'''$.MaintenanceId.Notes''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'tenant': serializeParam(
+                                          valueOrDefault<String>(
+                                            getJsonField(
+                                              pendingServiceRequestsFindAllPendingServiceRequestResponse
+                                                  .jsonBody,
+                                              r'''$.MaintenanceRequest.TenantId''',
+                                            )?.toString(),
+                                            '\$.MaintenanceRequest.tenantid',
+                                          ),
+                                          ParamType.String,
+                                        ),
+                                        'tenantId': serializeParam(
+                                          valueOrDefault<String>(
+                                            getJsonField(
+                                              pendingServiceRequestsFindAllPendingServiceRequestResponse
+                                                  .jsonBody,
+                                              r'''$.MeintenanceRequest.tenantId''',
+                                            )?.toString(),
+                                            'tenantId',
+                                          ),
+                                          ParamType.String,
+                                        ),
+                                        'images': serializeParam(
+                                          '',
+                                          ParamType.String,
+                                        ),
+                                        'availableTime': serializeParam(
+                                          '',
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
                                   },
                                 ),
                               ),

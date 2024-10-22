@@ -31,6 +31,8 @@ class _RequestTypesHeaderWidgetState extends State<RequestTypesHeaderWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RequestTypesHeaderModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -124,6 +126,7 @@ class _RequestTypesHeaderWidgetState extends State<RequestTypesHeaderWidget> {
               topLeft: Radius.circular(0.0),
               topRight: Radius.circular(0.0),
             ),
+            hoverColor: FlutterFlowTheme.of(context).primary,
           ),
         ),
         FFButtonWidget(

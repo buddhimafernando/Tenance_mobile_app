@@ -72,14 +72,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? const NavBarPage()
+          : const PendingServiceRequestsCopyWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? const NavBarPage()
+              : const PendingServiceRequestsCopyWidget(),
         ),
         FFRoute(
           name: 'homePage',
@@ -216,6 +218,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'selectedDate',
               ParamType.DateTime,
             ),
+            time: params.getParam(
+              'time',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -261,7 +267,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'pending_request',
           path: '/pendingRequest',
-          builder: (context, params) => const PendingRequestWidget(),
+          builder: (context, params) => PendingRequestWidget(
+            tenant: params.getParam(
+              'tenant',
+              ParamType.String,
+            ),
+            tenantId: params.getParam(
+              'tenantId',
+              ParamType.String,
+            ),
+            description: params.getParam(
+              'description',
+              ParamType.String,
+            ),
+            images: params.getParam(
+              'images',
+              ParamType.String,
+            ),
+            availableTime: params.getParam(
+              'availableTime',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ongoing_service_requests',
@@ -291,7 +318,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ongoing_request',
           path: '/ongoingRequest',
-          builder: (context, params) => const OngoingRequestWidget(),
+          builder: (context, params) => OngoingRequestWidget(
+            requestId: params.getParam(
+              'requestId',
+              ParamType.String,
+            ),
+            maintenanceType: params.getParam(
+              'maintenanceType',
+              ParamType.String,
+            ),
+            description: params.getParam(
+              'description',
+              ParamType.String,
+            ),
+            images: params.getParam(
+              'images',
+              ParamType.String,
+            ),
+            availableTime: params.getParam(
+              'availableTime',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ongoing_service_provider-profile',
+          path: '/ongoingServiceProviderProfile',
+          builder: (context, params) => OngoingServiceProviderProfileWidget(
+            workerName: params.getParam(
+              'workerName',
+              ParamType.String,
+            ),
+            workerImage: params.getParam(
+              'workerImage',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) => const TestWidget(),
+        ),
+        FFRoute(
+          name: 'pending_service_requestsCopy',
+          path: '/pendingServiceRequestsCopy',
+          builder: (context, params) => const PendingServiceRequestsCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -460,7 +532,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/splashScreen';
+            return '/pendingServiceRequestsCopy';
           }
           return null;
         },

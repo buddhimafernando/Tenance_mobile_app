@@ -4,29 +4,31 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/widgets/ongoing_request_card/ongoing_request_card_widget.dart';
+import '/widgets/completed_request_card/completed_request_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'ongoing_service_requests_model.dart';
-export 'ongoing_service_requests_model.dart';
+import 'completed_service_requests_model.dart';
+export 'completed_service_requests_model.dart';
 
-class OngoingServiceRequestsWidget extends StatefulWidget {
-  const OngoingServiceRequestsWidget({super.key});
+class CompletedServiceRequestsWidget extends StatefulWidget {
+  const CompletedServiceRequestsWidget({super.key});
 
   @override
-  State<OngoingServiceRequestsWidget> createState() =>
-      _OngoingServiceRequestsWidgetState();
+  State<CompletedServiceRequestsWidget> createState() =>
+      _CompletedServiceRequestsWidgetState();
 }
 
-class _OngoingServiceRequestsWidgetState
-    extends State<OngoingServiceRequestsWidget> {
-  late OngoingServiceRequestsModel _model;
+class _CompletedServiceRequestsWidgetState
+    extends State<CompletedServiceRequestsWidget> {
+  late CompletedServiceRequestsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => OngoingServiceRequestsModel());
+    _model = createModel(context, () => CompletedServiceRequestsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -39,7 +41,7 @@ class _OngoingServiceRequestsWidgetState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
-      future: FindAllOngoingServiceRequestsCall.call(),
+      future: FindAllCompletedServiceRequestsCall.call(),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -58,7 +60,7 @@ class _OngoingServiceRequestsWidgetState
             ),
           );
         }
-        final ongoingServiceRequestsFindAllOngoingServiceRequestsResponse =
+        final completedServiceRequestsFindAllCompletedServiceRequestsResponse =
             snapshot.data!;
 
         return GestureDetector(
@@ -111,12 +113,11 @@ class _OngoingServiceRequestsWidgetState
               top: true,
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      child: FlutterFlowChoiceChips(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FlutterFlowChoiceChips(
                         options: const [
                           ChipData('Pending'),
                           ChipData('Ongoing'),
@@ -164,48 +165,52 @@ class _OngoingServiceRequestsWidgetState
                         alignment: WrapAlignment.start,
                         controller: _model.choiceChipsValueController ??=
                             FormFieldController<List<String>>(
-                          ['Ongoing'],
+                          ['Completed'],
                         ),
                         wrapped: true,
                       ),
-                    ),
-                    Builder(
-                      builder: (context) {
-                        final ongoingRequests = getJsonField(
-                          ongoingServiceRequestsFindAllOngoingServiceRequestsResponse
-                              .jsonBody,
-                          r'''$''',
-                        ).toList();
+                      Builder(
+                        builder: (context) {
+                          final completedRequests = getJsonField(
+                            completedServiceRequestsFindAllCompletedServiceRequestsResponse
+                                .jsonBody,
+                            r'''$''',
+                          ).toList();
 
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: ongoingRequests.length,
-                          itemBuilder: (context, ongoingRequestsIndex) {
-                            final ongoingRequestsItem =
-                                ongoingRequests[ongoingRequestsIndex];
-                            return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 0.0),
-                              child: OngoingRequestCardWidget(
-                                key: Key(
-                                    'Key1mk_${ongoingRequestsIndex}_of_${ongoingRequests.length}'),
-                                request: getJsonField(
-                                  ongoingRequestsItem,
-                                  r'''$.MaintenanceRequestId.MaintenanceType''',
-                                ).toString(),
-                                content: getJsonField(
-                                  ongoingRequestsItem,
-                                  r'''$.MaintenanceRequestId.Notes''',
-                                ).toString(),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: completedRequests.length,
+                            itemBuilder: (context, completedRequestsIndex) {
+                              final completedRequestsItem =
+                                  completedRequests[completedRequestsIndex];
+                              return Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 0.0, 20.0, 0.0),
+                                child: CompletedRequestCardWidget(
+                                  key: Key(
+                                      'Keyyll_${completedRequestsIndex}_of_${completedRequests.length}'),
+                                  request: getJsonField(
+                                    completedRequestsItem,
+                                    r'''$.MaintenanceRequestId.MaintenanceType''',
+                                  ).toString(),
+                                  content: getJsonField(
+                                    completedRequestsItem,
+                                    r'''$.MaintenanceRequestId.Notes''',
+                                  ).toString(),
+                                  name: 'dwc',
+                                  navigateTo: () async {
+                                    context.pushNamed('completed_request');
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

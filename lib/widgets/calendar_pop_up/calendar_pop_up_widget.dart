@@ -33,6 +33,8 @@ class _CalendarPopUpWidgetState extends State<CalendarPopUpWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CalendarPopUpModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -62,9 +64,14 @@ class _CalendarPopUpWidgetState extends State<CalendarPopUpWidget> {
               weekStartsMonday: true,
               initialDate: widget.selectedDay,
               rowHeight: 40.0,
-              onChange: (DateTimeRange? newSelectedDate) {
-                safeSetState(
-                    () => _model.calendarSelectedDay = newSelectedDate);
+              onChange: (DateTimeRange? newSelectedDate) async {
+                if (_model.calendarSelectedDay == newSelectedDate) {
+                  return;
+                }
+                _model.calendarSelectedDay = newSelectedDate;
+                FFAppState().availableTime = _model.calendarSelectedDay?.start;
+                safeSetState(() {});
+                safeSetState(() {});
               },
               titleStyle: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Inter',
@@ -122,7 +129,7 @@ class _CalendarPopUpWidgetState extends State<CalendarPopUpWidget> {
                 activeColor: FlutterFlowTheme.of(context).primary,
                 checkColor: FlutterFlowTheme.of(context).info,
                 checkboxBorderColor: FlutterFlowTheme.of(context).tertiary,
-                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                textStyle: FlutterFlowTheme.of(context).labelSmall.override(
                       fontFamily: 'Inter',
                       letterSpacing: 0.0,
                     ),

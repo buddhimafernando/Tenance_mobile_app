@@ -6,25 +6,40 @@ import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/delete_dialog/delete_dialog_widget.dart';
 import '/widgets/label_and_content/label_and_content_widget.dart';
 import 'package:flutter/material.dart';
-import 'completed_request_model.dart';
-export 'completed_request_model.dart';
+import 'pending_request_model.dart';
+export 'pending_request_model.dart';
 
-class CompletedRequestWidget extends StatefulWidget {
-  const CompletedRequestWidget({super.key});
+class PendingRequestWidget extends StatefulWidget {
+  const PendingRequestWidget({
+    super.key,
+    required this.tenant,
+    required this.tenantId,
+    required this.description,
+    required this.images,
+    required this.availableTime,
+  });
+
+  final String? tenant;
+  final String? tenantId;
+  final String? description;
+  final String? images;
+  final String? availableTime;
 
   @override
-  State<CompletedRequestWidget> createState() => _CompletedRequestWidgetState();
+  State<PendingRequestWidget> createState() => _PendingRequestWidgetState();
 }
 
-class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
-  late CompletedRequestModel _model;
+class _PendingRequestWidgetState extends State<PendingRequestWidget> {
+  late PendingRequestModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CompletedRequestModel());
+    _model = createModel(context, () => PendingRequestModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -42,7 +57,7 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).alternate,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).alternate,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
@@ -66,7 +81,7 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
             ),
           ),
           title: Text(
-            'Service requests',
+            'Request',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter',
                   color: Colors.white,
@@ -90,18 +105,21 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
                   child: wrapWithModel(
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
-                    child: const LabelAndContentWidget(
+                    child: LabelAndContentWidget(
                       label: 'Tenant',
-                      content: 'Mr Bean',
+                      content: valueOrDefault<String>(
+                        widget.tenant,
+                        'tenant',
+                      ),
                     ),
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel2,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
+                  child: LabelAndContentWidget(
                     label: 'Tenant id',
-                    content: '12345678',
+                    content: widget.tenantId,
                   ),
                 ),
                 Padding(
@@ -109,10 +127,9 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
                   child: wrapWithModel(
                     model: _model.labelAndContentModel3,
                     updateCallback: () => safeSetState(() {}),
-                    child: const LabelAndContentWidget(
+                    child: LabelAndContentWidget(
                       label: 'Plumbing Status',
-                      content:
-                          'Dripping faucet in bathroom, wasting water, causing annoyance. Urgent fix needed to conserve precious resources and prevent potential water damage.....',
+                      content: widget.description,
                     ),
                   ),
                 ),
@@ -165,7 +182,8 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
                       wrapWithModel(
                         model: _model.availableTimeChipModel1,
                         updateCallback: () => safeSetState(() {}),
-                        child: const AvailableTimeChipWidget(
+                        child: AvailableTimeChipWidget(
+                          time: widget.availableTime,
                           chipHeight: 50.0,
                         ),
                       ),
@@ -222,112 +240,17 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'Status',
-                    style: FlutterFlowTheme.of(context).displayLarge.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.network(
-                              'https://picsum.photos/seed/476/600',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Olivia Rhye',
-                                style: FlutterFlowTheme.of(context)
-                                    .displayMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              Text(
-                                'olivia@gmail.com',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ].divide(const SizedBox(width: 20.0)),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FlutterFlowIconButton(
-                            borderColor: FlutterFlowTheme.of(context).accent1,
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).alternate,
-                            icon: Icon(
-                              Icons.person,
-                              color: FlutterFlowTheme.of(context).accent1,
-                              size: 24.0,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                          FlutterFlowIconButton(
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: Icon(
-                              Icons.chat_bubble,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ].divide(const SizedBox(width: 20.0)),
-                      ),
-                    ],
-                  ),
-                ),
                 Builder(
                   builder: (context) => Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 40.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
                     child: wrapWithModel(
                       model: _model.customButtonModel,
                       updateCallback: () => safeSetState(() {}),
                       child: CustomButtonWidget(
-                        buttonLabel: 'Re-initiate',
-                        buttonColor: FlutterFlowTheme.of(context).primary,
-                        borderColor: FlutterFlowTheme.of(context).primary,
+                        buttonLabel: 'Cancel',
+                        buttonColor: FlutterFlowTheme.of(context).error,
+                        borderColor: FlutterFlowTheme.of(context).error,
                         routeTo: () async {
                           await showDialog(
                             context: context,

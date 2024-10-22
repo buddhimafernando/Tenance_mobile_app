@@ -4,6 +4,23 @@ import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
+  ///  Local state fields for this page.
+
+  List<String> pieChartlabels = [
+    'Hello World',
+    'Hello World',
+    'Hello World',
+    'Hello World'
+  ];
+  void addToPieChartlabels(String item) => pieChartlabels.add(item);
+  void removeFromPieChartlabels(String item) => pieChartlabels.remove(item);
+  void removeAtIndexFromPieChartlabels(int index) =>
+      pieChartlabels.removeAt(index);
+  void insertAtIndexInPieChartlabels(int index, String item) =>
+      pieChartlabels.insert(index, item);
+  void updatePieChartlabelsAtIndex(int index, Function(String) updateFn) =>
+      pieChartlabels[index] = updateFn(pieChartlabels[index]);
+
   ///  State fields for stateful widgets in this page.
 
   // Model for horizontal_carousal component.

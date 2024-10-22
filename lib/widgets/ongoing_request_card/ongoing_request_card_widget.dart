@@ -2,6 +2,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/available_time_chip/available_time_chip_widget.dart';
 import '/widgets/cancel_button/cancel_button_widget.dart';
+import '/widgets/mark_as_complete_dialog/mark_as_complete_dialog_widget.dart';
+import '/widgets/mark_as_incomplete_dialog/mark_as_incomplete_dialog_widget.dart';
 import '/widgets/status_button/status_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'ongoing_request_card_model.dart';
@@ -12,11 +14,13 @@ class OngoingRequestCardWidget extends StatefulWidget {
     super.key,
     String? request,
     String? content,
+    required this.navigateTo,
   })  : request = request ?? 'request',
         content = content ?? 'content';
 
   final String request;
   final String content;
+  final Future Function()? navigateTo;
 
   @override
   State<OngoingRequestCardWidget> createState() =>
@@ -36,6 +40,8 @@ class _OngoingRequestCardWidgetState extends State<OngoingRequestCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => OngoingRequestCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -123,32 +129,70 @@ class _OngoingRequestCardWidgetState extends State<OngoingRequestCardWidget> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          wrapWithModel(
-                            model: _model.cancelButtonModel1,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CancelButtonWidget(
-                              button: 'Incomplete',
-                              fontSize: 14.0,
-                              labelColor:
-                                  FlutterFlowTheme.of(context).alternate,
-                              buttonWidth: 110.0,
-                              buttonHeight: 40.0,
-                              onPressed: () async {},
+                          Builder(
+                            builder: (context) => wrapWithModel(
+                              model: _model.cancelButtonModel1,
+                              updateCallback: () => safeSetState(() {}),
+                              child: CancelButtonWidget(
+                                button: 'Incomplete',
+                                fontSize: 14.0,
+                                labelColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                buttonWidth: 110.0,
+                                buttonHeight: 40.0,
+                                onPressed: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: const MarkAsIncompleteDialogWidget(),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                          wrapWithModel(
-                            model: _model.cancelButtonModel2,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CancelButtonWidget(
-                              button: 'Complete',
-                              fontSize: 14.0,
-                              labelColor:
-                                  FlutterFlowTheme.of(context).alternate,
-                              buttonColor: FlutterFlowTheme.of(context).primary,
-                              borderColor: FlutterFlowTheme.of(context).primary,
-                              buttonWidth: 110.0,
-                              buttonHeight: 40.0,
-                              onPressed: () async {},
+                          Builder(
+                            builder: (context) => wrapWithModel(
+                              model: _model.cancelButtonModel2,
+                              updateCallback: () => safeSetState(() {}),
+                              child: CancelButtonWidget(
+                                button: 'Complete',
+                                fontSize: 14.0,
+                                labelColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                buttonColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                buttonWidth: 110.0,
+                                buttonHeight: 40.0,
+                                onPressed: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: const MarkAsCompleteDialogWidget(),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ].divide(const SizedBox(width: 10.0)),

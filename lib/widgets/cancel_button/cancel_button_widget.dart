@@ -50,6 +50,8 @@ class _CancelButtonWidgetState extends State<CancelButtonWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CancelButtonModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

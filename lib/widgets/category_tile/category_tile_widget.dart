@@ -37,6 +37,8 @@ class _CategoryTileWidgetState extends State<CategoryTileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CategoryTileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

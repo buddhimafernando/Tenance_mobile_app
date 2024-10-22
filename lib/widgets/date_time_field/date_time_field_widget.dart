@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/widgets/calendar_pop_up/calendar_pop_up_widget.dart';
 import 'package:flutter/material.dart';
 import 'date_time_field_model.dart';
 export 'date_time_field_model.dart';
@@ -38,6 +37,8 @@ class _DateTimeFieldWidgetState extends State<DateTimeFieldWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DateTimeFieldModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,7 +69,10 @@ class _DateTimeFieldWidgetState extends State<DateTimeFieldWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.date,
+                    valueOrDefault<String>(
+                      dateTimeFormat("MMMMEEEEd", _model.datePicked),
+                      'date',
+                    ),
                     style: FlutterFlowTheme.of(context).displayMedium.override(
                           fontFamily: 'Inter',
                           fontSize: 12.0,
@@ -76,7 +80,10 @@ class _DateTimeFieldWidgetState extends State<DateTimeFieldWidget> {
                         ),
                   ),
                   Text(
-                    widget.time,
+                    valueOrDefault<String>(
+                      dateTimeFormat("jm", _model.datePicked),
+                      'time',
+                    ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
@@ -86,47 +93,114 @@ class _DateTimeFieldWidgetState extends State<DateTimeFieldWidget> {
               ),
               Align(
                 alignment: const AlignmentDirectional(1.0, 0.0),
-                child: Builder(
-                  builder: (context) => FFButtonWidget(
-                    onPressed: () async {
-                      await showDialog(
-                        barrierColor: const Color(0x80000000),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    final datePickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: getCurrentTimestamp,
+                      firstDate: getCurrentTimestamp,
+                      lastDate: DateTime(2050),
+                      builder: (context, child) {
+                        return wrapInMaterialDatePickerTheme(
+                          context,
+                          child!,
+                          headerBackgroundColor:
+                              FlutterFlowTheme.of(context).primary,
+                          headerForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          headerTextStyle: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .override(
+                                fontFamily: 'Inter',
+                                fontSize: 32.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                          pickerBackgroundColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          pickerForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          selectedDateTimeBackgroundColor:
+                              FlutterFlowTheme.of(context).primary,
+                          selectedDateTimeForegroundColor:
+                              FlutterFlowTheme.of(context).info,
+                          actionButtonForegroundColor:
+                              FlutterFlowTheme.of(context).primaryText,
+                          iconSize: 24.0,
+                        );
+                      },
+                    );
+
+                    TimeOfDay? datePickedTime;
+                    if (datePickedDate != null) {
+                      datePickedTime = await showTimePicker(
                         context: context,
-                        builder: (dialogContext) {
-                          return Dialog(
-                            elevation: 0,
-                            insetPadding: EdgeInsets.zero,
-                            backgroundColor: Colors.transparent,
-                            alignment: const AlignmentDirectional(0.0, 0.0)
-                                .resolve(Directionality.of(context)),
-                            child: CalendarPopUpWidget(
-                              selectedDay: widget.selectedDate,
-                            ),
+                        initialTime:
+                            TimeOfDay.fromDateTime(getCurrentTimestamp),
+                        builder: (context, child) {
+                          return wrapInMaterialTimePickerTheme(
+                            context,
+                            child!,
+                            headerBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            headerForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            headerTextStyle: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                            pickerBackgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            pickerForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            selectedDateTimeBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            selectedDateTimeForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            actionButtonForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            iconSize: 24.0,
                           );
                         },
                       );
-                    },
-                    text: 'Select',
-                    options: FFButtonOptions(
-                      width: 70.0,
-                      height: 30.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).alternate,
-                      textStyle:
-                          FlutterFlowTheme.of(context).displaySmall.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).tertiary,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
+                    }
+
+                    if (datePickedDate != null && datePickedTime != null) {
+                      safeSetState(() {
+                        _model.datePicked = DateTime(
+                          datePickedDate.year,
+                          datePickedDate.month,
+                          datePickedDate.day,
+                          datePickedTime!.hour,
+                          datePickedTime.minute,
+                        );
+                      });
+                    }
+                  },
+                  text: 'Select',
+                  options: FFButtonOptions(
+                    width: 70.0,
+                    height: 30.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).alternate,
+                    textStyle:
+                        FlutterFlowTheme.of(context).displaySmall.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).tertiary,
+                      width: 1.0,
                     ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ),

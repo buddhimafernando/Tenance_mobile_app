@@ -18,10 +18,10 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
-    "serve": "firebase -P test-25085 emulators:start --only functions",
-    "shell": "firebase -P test-25085 functions:shell",
+    "serve": "firebase -P ants-13ab5 emulators:start --only functions",
+    "shell": "firebase -P ants-13ab5 functions:shell",
     "start": "npm run shell",
-    "logs": "firebase -P test-25085 functions:log",
+    "logs": "firebase -P ants-13ab5 functions:log",
     "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json"
   },
   "engines": {

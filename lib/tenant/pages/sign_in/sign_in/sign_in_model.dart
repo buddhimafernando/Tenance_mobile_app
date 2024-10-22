@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_textfield/custom_textfield_widget.dart';
@@ -14,6 +15,8 @@ class SignInModel extends FlutterFlowModel<SignInWidget> {
   late PasswordFieldModel passwordFieldModel;
   // Model for custom_button component.
   late CustomButtonModel customButtonModel;
+  // Stores action output result for [Backend Call - API (findTenantDetails)] action in custom_button widget.
+  ApiCallResponse? apiResulta8f;
 
   @override
   void initState(BuildContext context) {

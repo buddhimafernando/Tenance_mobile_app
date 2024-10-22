@@ -11,11 +11,13 @@ class CustomDropdownWidget extends StatefulWidget {
     super.key,
     String? hintText,
     String? label,
+    this.listOfOptions,
   })  : hintText = hintText ?? 'hintText',
         label = label ?? 'label';
 
   final String hintText;
   final String label;
+  final List<String>? listOfOptions;
 
   @override
   State<CustomDropdownWidget> createState() => _CustomDropdownWidgetState();
@@ -34,6 +36,8 @@ class _CustomDropdownWidgetState extends State<CustomDropdownWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CustomDropdownModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -65,25 +69,20 @@ class _CustomDropdownWidgetState extends State<CustomDropdownWidget> {
             child: FlutterFlowDropDown<String>(
               controller: _model.dropDownValueController ??=
                   FormFieldController<String>(null),
-              options: List<String>.from(['Option 1', 'Option 2', 'Option 3']),
-              optionLabels: const ['Option 1', 'Option 2', 'Option 3'],
+              options: widget.listOfOptions!,
               onChanged: (val) =>
                   safeSetState(() => _model.dropDownValue = val),
               width: double.infinity,
               height: 40.0,
-              textStyle: FlutterFlowTheme.of(context).displayMedium.override(
+              textStyle: FlutterFlowTheme.of(context).labelMedium.override(
                     fontFamily: 'Inter',
-                    color: FlutterFlowTheme.of(context).tertiary,
                     letterSpacing: 0.0,
                   ),
-              hintText: valueOrDefault<String>(
-                widget.hintText,
-                'Selectitem',
-              ),
+              hintText: widget.hintText,
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
-                color: FlutterFlowTheme.of(context).tertiary,
-                size: 20.0,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 24.0,
               ),
               fillColor: FlutterFlowTheme.of(context).secondaryBackground,
               elevation: 2.0,

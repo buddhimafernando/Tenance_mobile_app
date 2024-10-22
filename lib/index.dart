@@ -37,19 +37,24 @@ export '/tenant/pages/sign_up/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
 export '/tenant/pages/sign_up/password_changed/password_changed_widget.dart'
     show PasswordChangedWidget;
-export '/tenant/pages/service_requests/pending_service_requests/pending_service_requests_widget.dart'
+export '/tenant/pages/service_requests/pending/pending_service_requests/pending_service_requests_widget.dart'
     show PendingServiceRequestsWidget;
-export '/tenant/pages/service_requests/pending_request/pending_request_widget.dart'
+export '/tenant/pages/service_requests/pending/pending_request/pending_request_widget.dart'
     show PendingRequestWidget;
-export '/tenant/pages/service_requests/ongoing_service_requests/ongoing_service_requests_widget.dart'
+export '/tenant/pages/service_requests/ongoing/ongoing_service_requests/ongoing_service_requests_widget.dart'
     show OngoingServiceRequestsWidget;
-export '/tenant/pages/service_requests/completed_service_requests/completed_service_requests_widget.dart'
+export '/tenant/pages/service_requests/completed/completed_service_requests/completed_service_requests_widget.dart'
     show CompletedServiceRequestsWidget;
 export '/tenant/pages/service_requests/rejected_service_requests/rejected_service_requests_widget.dart'
     show RejectedServiceRequestsWidget;
-export '/splash/splash_screen/splash_screen_widget.dart'
+export '/tenant/pages/splash/splash_screen/splash_screen_widget.dart'
     show SplashScreenWidget;
-export '/tenant/pages/service_requests/completed_request/completed_request_widget.dart'
+export '/tenant/pages/service_requests/completed/completed_request/completed_request_widget.dart'
     show CompletedRequestWidget;
-export '/tenant/pages/service_requests/ongoing_request/ongoing_request_widget.dart'
+export '/tenant/pages/service_requests/ongoing/ongoing_request/ongoing_request_widget.dart'
     show OngoingRequestWidget;
+export '/tenant/pages/service_requests/ongoing/ongoing_service_provider_profile/ongoing_service_provider_profile_widget.dart'
+    show OngoingServiceProviderProfileWidget;
+export '/test/test_widget.dart' show TestWidget;
+export '/tenant/pages/service_requests/pending/pending_service_requests_copy/pending_service_requests_copy_widget.dart'
+    show PendingServiceRequestsCopyWidget;

@@ -21,6 +21,8 @@ class _PasswordChangedWidgetState extends State<PasswordChangedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PasswordChangedModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

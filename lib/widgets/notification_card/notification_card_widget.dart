@@ -41,6 +41,8 @@ class _NotificationCardWidgetState extends State<NotificationCardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NotificationCardModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

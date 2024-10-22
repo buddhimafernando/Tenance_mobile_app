@@ -26,6 +26,8 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DeleteDialogModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

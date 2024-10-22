@@ -4,29 +4,31 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/widgets/completed_request_card/completed_request_card_widget.dart';
+import '/widgets/ongoing_request_card/ongoing_request_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'completed_service_requests_model.dart';
-export 'completed_service_requests_model.dart';
+import 'ongoing_service_requests_model.dart';
+export 'ongoing_service_requests_model.dart';
 
-class CompletedServiceRequestsWidget extends StatefulWidget {
-  const CompletedServiceRequestsWidget({super.key});
+class OngoingServiceRequestsWidget extends StatefulWidget {
+  const OngoingServiceRequestsWidget({super.key});
 
   @override
-  State<CompletedServiceRequestsWidget> createState() =>
-      _CompletedServiceRequestsWidgetState();
+  State<OngoingServiceRequestsWidget> createState() =>
+      _OngoingServiceRequestsWidgetState();
 }
 
-class _CompletedServiceRequestsWidgetState
-    extends State<CompletedServiceRequestsWidget> {
-  late CompletedServiceRequestsModel _model;
+class _OngoingServiceRequestsWidgetState
+    extends State<OngoingServiceRequestsWidget> {
+  late OngoingServiceRequestsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CompletedServiceRequestsModel());
+    _model = createModel(context, () => OngoingServiceRequestsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -39,7 +41,7 @@ class _CompletedServiceRequestsWidgetState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ApiCallResponse>(
-      future: FindAllCompletedServiceRequestsCall.call(),
+      future: FindAllOngoingServiceRequestsCall.call(),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -58,7 +60,7 @@ class _CompletedServiceRequestsWidgetState
             ),
           );
         }
-        final completedServiceRequestsFindAllCompletedServiceRequestsResponse =
+        final ongoingServiceRequestsFindAllOngoingServiceRequestsResponse =
             snapshot.data!;
 
         return GestureDetector(
@@ -111,11 +113,12 @@ class _CompletedServiceRequestsWidgetState
               top: true,
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FlutterFlowChoiceChips(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: FlutterFlowChoiceChips(
                         options: const [
                           ChipData('Pending'),
                           ChipData('Ongoing'),
@@ -163,45 +166,99 @@ class _CompletedServiceRequestsWidgetState
                         alignment: WrapAlignment.start,
                         controller: _model.choiceChipsValueController ??=
                             FormFieldController<List<String>>(
-                          ['Completed'],
+                          ['Ongoing'],
                         ),
                         wrapped: true,
                       ),
-                      Builder(
-                        builder: (context) {
-                          final completedRequests = getJsonField(
-                            completedServiceRequestsFindAllCompletedServiceRequestsResponse
-                                .jsonBody,
-                            r'''$''',
-                          ).toList();
+                    ),
+                    Builder(
+                      builder: (context) {
+                        final ongoingRequests = getJsonField(
+                          ongoingServiceRequestsFindAllOngoingServiceRequestsResponse
+                              .jsonBody,
+                          r'''$''',
+                        ).toList();
 
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: completedRequests.length,
-                            itemBuilder: (context, completedRequestsIndex) {
-                              final completedRequestsItem =
-                                  completedRequests[completedRequestsIndex];
-                              return CompletedRequestCardWidget(
-                                key: Key(
-                                    'Keyyll_${completedRequestsIndex}_of_${completedRequests.length}'),
-                                request: getJsonField(
-                                  completedRequestsItem,
-                                  r'''$.MaintenanceRequestId.MaintenanceType''',
-                                ).toString(),
-                                content: getJsonField(
-                                  completedRequestsItem,
-                                  r'''$.MaintenanceRequestId.Notes''',
-                                ).toString(),
-                                name: 'dwc',
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: ongoingRequests.length,
+                          itemBuilder: (context, ongoingRequestsIndex) {
+                            final ongoingRequestsItem =
+                                ongoingRequests[ongoingRequestsIndex];
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 20.0, 20.0, 0.0),
+                              child: wrapWithModel(
+                                model: _model.ongoingRequestCardModels.getModel(
+                                  ongoingRequestsItem.toString(),
+                                  ongoingRequestsIndex,
+                                ),
+                                updateCallback: () => safeSetState(() {}),
+                                updateOnChange: true,
+                                child: OngoingRequestCardWidget(
+                                  key: Key(
+                                    'Key1mk_${ongoingRequestsItem.toString()}',
+                                  ),
+                                  request: getJsonField(
+                                    ongoingRequestsItem,
+                                    r'''$.MaintenanceRequestId.MaintenanceType''',
+                                  ).toString(),
+                                  content: getJsonField(
+                                    ongoingRequestsItem,
+                                    r'''$.MaintenanceRequest.Notes''',
+                                  ).toString(),
+                                  navigateTo: () async {
+                                    context.pushNamed(
+                                      'ongoing_request',
+                                      queryParameters: {
+                                        'requestId': serializeParam(
+                                          getJsonField(
+                                            ongoingRequestsItem,
+                                            r'''$.MaintenanceRequest.ServiceRequestId''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'maintenanceType': serializeParam(
+                                          getJsonField(
+                                            ongoingRequestsItem,
+                                            r'''$.MaintenanceRequest.MaintenanceType''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'description': serializeParam(
+                                          getJsonField(
+                                            ongoingRequestsItem,
+                                            r'''$.MaintenanceRequest.Notes''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'images': serializeParam(
+                                          getJsonField(
+                                            ongoingRequestsItem,
+                                            r'''$.MaintenanceRequest.Images''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                        'availableTime': serializeParam(
+                                          getJsonField(
+                                            ongoingRequestsItem,
+                                            r'''$.MaintenanceRequest.AvailableTime''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),

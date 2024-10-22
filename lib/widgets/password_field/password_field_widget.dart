@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'password_field_model.dart';
 export 'password_field_model.dart';
 
@@ -36,6 +35,8 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -134,13 +135,6 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
                       letterSpacing: 0.0,
                       lineHeight: 1.5,
                     ),
-                maxLength: 6,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                buildCounter: (context,
-                        {required currentLength,
-                        required isFocused,
-                        maxLength}) =>
-                    null,
                 cursorColor: FlutterFlowTheme.of(context).primaryText,
                 validator: _model.textControllerValidator.asValidator(context),
               ),

@@ -23,6 +23,8 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ResetPasswordModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

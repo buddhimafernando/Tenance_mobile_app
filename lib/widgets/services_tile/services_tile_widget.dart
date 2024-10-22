@@ -38,6 +38,8 @@ class _ServicesTileWidgetState extends State<ServicesTileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ServicesTileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -5,6 +5,7 @@ import 'custom_textfield_model.dart';
 export 'custom_textfield_model.dart';
 
 class CustomTextfieldWidget extends StatefulWidget {
+  /// common
   const CustomTextfieldWidget({
     super.key,
     String? hintLabel,
@@ -48,6 +49,8 @@ class _CustomTextfieldWidgetState extends State<CustomTextfieldWidget> {
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -23,6 +23,8 @@ class _EnterCodeWidgetState extends State<EnterCodeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EnterCodeModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

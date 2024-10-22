@@ -35,6 +35,8 @@ class _HorizontalCarousalWidgetState extends State<HorizontalCarousalWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HorizontalCarousalModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

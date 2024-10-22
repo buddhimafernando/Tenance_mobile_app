@@ -33,6 +33,8 @@ class _StatusButtonWidgetState extends State<StatusButtonWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => StatusButtonModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

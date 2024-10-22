@@ -30,6 +30,8 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CustomAppbarModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
