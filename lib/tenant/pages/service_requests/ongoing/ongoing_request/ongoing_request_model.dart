@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/available_time_chip/available_time_chip_widget.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
@@ -20,6 +21,8 @@ class OngoingRequestModel extends FlutterFlowModel<OngoingRequestWidget> {
   late AvailableTimeChipModel availableTimeChipModel2;
   // Model for available_time_chip component.
   late AvailableTimeChipModel availableTimeChipModel3;
+  // Stores action output result for [Backend Call - API (findServiceProviderDetails)] action in IconButton widget.
+  ApiCallResponse? apiResultw39;
   // Model for custom_button component.
   late CustomButtonModel customButtonModel1;
   // Model for custom_button component.

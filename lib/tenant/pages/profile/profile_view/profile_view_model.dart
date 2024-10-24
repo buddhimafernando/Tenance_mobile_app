@@ -18,7 +18,9 @@ class ProfileViewModel extends FlutterFlowModel<ProfileViewWidget> {
   // Model for label_and_content component.
   late LabelAndContentModel labelAndContentModel4;
   // Model for custom_button component.
-  late CustomButtonModel customButtonModel;
+  late CustomButtonModel customButtonModel1;
+  // Model for custom_button component.
+  late CustomButtonModel customButtonModel2;
 
   @override
   void initState(BuildContext context) {
@@ -27,7 +29,8 @@ class ProfileViewModel extends FlutterFlowModel<ProfileViewWidget> {
     labelAndContentModel2 = createModel(context, () => LabelAndContentModel());
     labelAndContentModel3 = createModel(context, () => LabelAndContentModel());
     labelAndContentModel4 = createModel(context, () => LabelAndContentModel());
-    customButtonModel = createModel(context, () => CustomButtonModel());
+    customButtonModel1 = createModel(context, () => CustomButtonModel());
+    customButtonModel2 = createModel(context, () => CustomButtonModel());
   }
 
   @override
@@ -37,6 +40,7 @@ class ProfileViewModel extends FlutterFlowModel<ProfileViewWidget> {
     labelAndContentModel2.dispose();
     labelAndContentModel3.dispose();
     labelAndContentModel4.dispose();
-    customButtonModel.dispose();
+    customButtonModel1.dispose();
+    customButtonModel2.dispose();
   }
 }

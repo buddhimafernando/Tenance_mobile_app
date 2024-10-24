@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/cancel_button/cancel_button_widget.dart';
+import '/widgets/delete_dialog/delete_dialog_widget.dart';
 import '/widgets/status_button/status_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -137,19 +138,37 @@ class _PendingRequestCardWidgetState extends State<PendingRequestCardWidget> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          wrapWithModel(
-                            model: _model.cancelButtonModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CancelButtonWidget(
-                              button: 'Cancel',
-                              fontSize: 14.0,
-                              labelColor:
-                                  FlutterFlowTheme.of(context).alternate,
-                              buttonWidth: 110.0,
-                              buttonHeight: 40.0,
-                              onPressed: () async {
-                                await widget.popUp?.call();
-                              },
+                          Builder(
+                            builder: (context) => wrapWithModel(
+                              model: _model.cancelButtonModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: CancelButtonWidget(
+                                button: 'Cancel',
+                                fontSize: 14.0,
+                                labelColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                buttonWidth: 110.0,
+                                buttonHeight: 40.0,
+                                onPressed: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: const DeleteDialogWidget(
+                                          serviceRequestId: '',
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           Align(

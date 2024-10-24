@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'pending_service_requests_copy_widget.dart'
-    show PendingServiceRequestsCopyWidget;
+import 'service_requests_widget.dart' show ServiceRequestsWidget;
 import 'package:flutter/material.dart';
 
-class PendingServiceRequestsCopyModel
-    extends FlutterFlowModel<PendingServiceRequestsCopyWidget> {
+class ServiceRequestsModel extends FlutterFlowModel<ServiceRequestsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TabBar widget.

@@ -153,11 +153,39 @@ class _SignInWidgetState extends State<SignInWidget> {
                       }
 
                       if (currentUserEmailVerified) {
-                        _model.apiResulta8f =
-                            await FindTenantDetailsCall.call();
+                        _model.apiResulta8f = await FindTenantDetailsCall.call(
+                          tenantId: currentUserUid,
+                        );
 
                         if ((_model.apiResulta8f?.succeeded ?? true)) {
-                          context.pushNamedAuth('homePage', context.mounted);
+                          FFAppState().email = getJsonField(
+                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            r'''$.Email''',
+                          ).toString();
+                          FFAppState().userName = getJsonField(
+                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            r'''$.Name''',
+                          ).toString();
+                          FFAppState().tenantId = getJsonField(
+                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            r'''$.TenantId''',
+                          ).toString();
+                          FFAppState().mobileNumber = getJsonField(
+                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            r'''$.PhoneNumber''',
+                          ).toString();
+                          safeSetState(() {});
+
+                          context.pushNamedAuth(
+                            'homePage',
+                            context.mounted,
+                            queryParameters: {
+                              'tenantId': serializeParam(
+                                '',
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

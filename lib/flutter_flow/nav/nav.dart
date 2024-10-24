@@ -72,299 +72,261 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const NavBarPage()
-          : const PendingServiceRequestsCopyWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? const NavBarPage() : const SignInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const NavBarPage()
-              : const PendingServiceRequestsCopyWidget(),
-        ),
-        FFRoute(
-          name: 'homePage',
-          path: '/homePage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'homePage')
-              : const HomePageWidget(),
-        ),
-        FFRoute(
-          name: 'add_new_provider',
-          path: '/addNewProvider',
-          builder: (context, params) => const AddNewProviderWidget(),
-        ),
-        FFRoute(
-          name: 'service_providers',
-          path: '/serviceProviders',
-          builder: (context, params) => const ServiceProvidersWidget(),
-        ),
-        FFRoute(
-          name: 'notifications',
-          path: '/notifications',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'notifications')
-              : const NotificationsWidget(),
-        ),
-        FFRoute(
-          name: 'inquiries',
-          path: '/inquiries',
-          builder: (context, params) => const InquiriesWidget(),
-        ),
-        FFRoute(
-          name: 'inquiry_view',
-          path: '/inquiryView',
-          builder: (context, params) => const InquiryViewWidget(),
-        ),
-        FFRoute(
-          name: 'service_types',
-          path: '/serviceTypes',
-          builder: (context, params) => const ServiceTypesWidget(),
-        ),
-        FFRoute(
-          name: 'service_category',
-          path: '/serviceCategory',
-          builder: (context, params) => const ServiceCategoryWidget(),
-        ),
-        FFRoute(
-          name: 'service_workers',
-          path: '/serviceWorkers',
-          builder: (context, params) => const ServiceWorkersWidget(),
-        ),
-        FFRoute(
-          name: 'service_provider_profile',
-          path: '/serviceProviderProfile',
-          builder: (context, params) => ServiceProviderProfileWidget(
-            workerName: params.getParam(
-              'workerName',
-              ParamType.String,
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const NavBarPage() : const SignInWidget(),
+          routes: [
+            FFRoute(
+              name: 'homePage',
+              path: 'homePage',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'homePage')
+                  : NavBarPage(
+                      initialPage: 'homePage',
+                      page: HomePageWidget(
+                        tenantId: params.getParam(
+                          'tenantId',
+                          ParamType.String,
+                        ),
+                      ),
+                    ),
             ),
-            workerImage: params.getParam(
-              'workerImage',
-              ParamType.String,
+            FFRoute(
+              name: 'notifications',
+              path: 'notifications',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'notifications')
+                  : const NotificationsWidget(),
             ),
-          ),
-        ),
-        FFRoute(
-          name: 'inquiry',
-          path: '/inquiry',
-          builder: (context, params) => const InquiryWidget(),
-        ),
-        FFRoute(
-          name: 'profile_view',
-          path: '/profileView',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'profile_view')
-              : ProfileViewWidget(
-                  profileImage: params.getParam(
-                    'profileImage',
-                    ParamType.String,
-                  ),
-                  email: params.getParam(
-                    'email',
-                    ParamType.String,
-                  ),
-                  userName: params.getParam(
-                    'userName',
-                    ParamType.String,
-                  ),
-                  agreemantId: params.getParam(
-                    'agreemantId',
-                    ParamType.String,
-                  ),
-                  content: params.getParam(
-                    'content',
-                    ParamType.String,
-                  ),
+            FFRoute(
+              name: 'inquiry',
+              path: 'inquiry',
+              builder: (context, params) => const InquiryWidget(),
+            ),
+            FFRoute(
+              name: 'profile_view',
+              path: 'profileView',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'profile_view')
+                  : ProfileViewWidget(
+                      profileImage: params.getParam(
+                        'profileImage',
+                        ParamType.String,
+                      ),
+                      email: params.getParam(
+                        'email',
+                        ParamType.String,
+                      ),
+                      userName: params.getParam(
+                        'userName',
+                        ParamType.String,
+                      ),
+                      agreemantId: params.getParam(
+                        'agreemantId',
+                        ParamType.String,
+                      ),
+                      content: params.getParam(
+                        'content',
+                        ParamType.String,
+                      ),
+                    ),
+            ),
+            FFRoute(
+              name: 'update_profile',
+              path: 'updateProfile',
+              builder: (context, params) => UpdateProfileWidget(
+                profileImage: params.getParam(
+                  'profileImage',
+                  ParamType.String,
                 ),
-        ),
-        FFRoute(
-          name: 'update_profile',
-          path: '/updateProfile',
-          builder: (context, params) => UpdateProfileWidget(
-            profileImage: params.getParam(
-              'profileImage',
-              ParamType.String,
+                email: params.getParam(
+                  'email',
+                  ParamType.String,
+                ),
+                userName: params.getParam(
+                  'userName',
+                  ParamType.String,
+                ),
+                agreemantId: params.getParam(
+                  'agreemantId',
+                  ParamType.String,
+                ),
+                content: params.getParam(
+                  'content',
+                  ParamType.String,
+                ),
+              ),
             ),
-            email: params.getParam(
-              'email',
-              ParamType.String,
+            FFRoute(
+              name: 'new_request',
+              path: 'newRequest',
+              builder: (context, params) => NewRequestWidget(
+                dropdownList: params.getParam<String>(
+                  'dropdownList',
+                  ParamType.String,
+                  isList: true,
+                ),
+                selectedDate: params.getParam(
+                  'selectedDate',
+                  ParamType.DateTime,
+                ),
+                time: params.getParam(
+                  'time',
+                  ParamType.String,
+                ),
+              ),
             ),
-            userName: params.getParam(
-              'userName',
-              ParamType.String,
+            FFRoute(
+              name: 'request_sent',
+              path: 'requestSent',
+              builder: (context, params) => const RequestSentWidget(),
             ),
-            agreemantId: params.getParam(
-              'agreemantId',
-              ParamType.String,
+            FFRoute(
+              name: 'sign_in',
+              path: 'signIn',
+              builder: (context, params) => const SignInWidget(),
             ),
-            content: params.getParam(
-              'content',
-              ParamType.String,
+            FFRoute(
+              name: 'sign_up',
+              path: 'signUp',
+              builder: (context, params) => const SignUpWidget(),
             ),
-          ),
-        ),
-        FFRoute(
-          name: 'new_request',
-          path: '/newRequest',
-          builder: (context, params) => NewRequestWidget(
-            dropdownList: params.getParam<String>(
-              'dropdownList',
-              ParamType.String,
-              isList: true,
+            FFRoute(
+              name: 'enter_code',
+              path: 'enterCode',
+              builder: (context, params) => const EnterCodeWidget(),
             ),
-            selectedDate: params.getParam(
-              'selectedDate',
-              ParamType.DateTime,
+            FFRoute(
+              name: 'forgot_password',
+              path: 'forgotPassword',
+              builder: (context, params) => const ForgotPasswordWidget(),
             ),
-            time: params.getParam(
-              'time',
-              ParamType.String,
+            FFRoute(
+              name: 'reset_password',
+              path: 'resetPassword',
+              builder: (context, params) => const ResetPasswordWidget(),
             ),
-          ),
-        ),
-        FFRoute(
-          name: 'request_sent',
-          path: '/requestSent',
-          builder: (context, params) => const RequestSentWidget(),
-        ),
-        FFRoute(
-          name: 'sign_in',
-          path: '/signIn',
-          builder: (context, params) => const SignInWidget(),
-        ),
-        FFRoute(
-          name: 'sign_up',
-          path: '/signUp',
-          builder: (context, params) => const SignUpWidget(),
-        ),
-        FFRoute(
-          name: 'enter_code',
-          path: '/enterCode',
-          builder: (context, params) => const EnterCodeWidget(),
-        ),
-        FFRoute(
-          name: 'forgot_password',
-          path: '/forgotPassword',
-          builder: (context, params) => const ForgotPasswordWidget(),
-        ),
-        FFRoute(
-          name: 'reset_password',
-          path: '/resetPassword',
-          builder: (context, params) => const ResetPasswordWidget(),
-        ),
-        FFRoute(
-          name: 'password_changed',
-          path: '/passwordChanged',
-          builder: (context, params) => const PasswordChangedWidget(),
-        ),
-        FFRoute(
-          name: 'pending_service_requests',
-          path: '/pendingServiceRequests',
-          builder: (context, params) => const PendingServiceRequestsWidget(),
-        ),
-        FFRoute(
-          name: 'pending_request',
-          path: '/pendingRequest',
-          builder: (context, params) => PendingRequestWidget(
-            tenant: params.getParam(
-              'tenant',
-              ParamType.String,
+            FFRoute(
+              name: 'password_changed',
+              path: 'passwordChanged',
+              builder: (context, params) => const PasswordChangedWidget(),
             ),
-            tenantId: params.getParam(
-              'tenantId',
-              ParamType.String,
+            FFRoute(
+              name: 'pending_request',
+              path: 'pendingRequest',
+              builder: (context, params) => PendingRequestWidget(
+                tenant: params.getParam(
+                  'tenant',
+                  ParamType.String,
+                ),
+                tenantId: params.getParam(
+                  'tenantId',
+                  ParamType.String,
+                ),
+                description: params.getParam(
+                  'description',
+                  ParamType.String,
+                ),
+                images: params.getParam(
+                  'images',
+                  ParamType.String,
+                ),
+                availableTime: params.getParam(
+                  'availableTime',
+                  ParamType.String,
+                ),
+                requestId: params.getParam(
+                  'requestId',
+                  ParamType.String,
+                ),
+              ),
             ),
-            description: params.getParam(
-              'description',
-              ParamType.String,
+            FFRoute(
+              name: 'splash_screen',
+              path: 'splashScreen',
+              builder: (context, params) => const SplashScreenWidget(),
             ),
-            images: params.getParam(
-              'images',
-              ParamType.String,
+            FFRoute(
+              name: 'completed_request',
+              path: 'completedRequest',
+              builder: (context, params) => const CompletedRequestWidget(),
             ),
-            availableTime: params.getParam(
-              'availableTime',
-              ParamType.String,
+            FFRoute(
+              name: 'ongoing_request',
+              path: 'ongoingRequest',
+              builder: (context, params) => OngoingRequestWidget(
+                requestId: params.getParam(
+                  'requestId',
+                  ParamType.String,
+                ),
+                maintenanceType: params.getParam(
+                  'maintenanceType',
+                  ParamType.String,
+                ),
+                description: params.getParam(
+                  'description',
+                  ParamType.String,
+                ),
+                images: params.getParam(
+                  'images',
+                  ParamType.String,
+                ),
+                availableTime: params.getParam(
+                  'availableTime',
+                  ParamType.String,
+                ),
+                serviceProviderId: params.getParam(
+                  'serviceProviderId',
+                  ParamType.String,
+                ),
+              ),
             ),
-          ),
+            FFRoute(
+              name: 'ongoing_service_provider-profile',
+              path: 'ongoingServiceProviderProfile',
+              builder: (context, params) => OngoingServiceProviderProfileWidget(
+                agreementId: params.getParam(
+                  'agreementId',
+                  ParamType.String,
+                ),
+                serviceProviderId: params.getParam(
+                  'serviceProviderId',
+                  ParamType.String,
+                ),
+                providedServices: params.getParam(
+                  'providedServices',
+                  ParamType.String,
+                ),
+                mobileNumber: params.getParam(
+                  'mobileNumber',
+                  ParamType.String,
+                ),
+                email: params.getParam(
+                  'email',
+                  ParamType.String,
+                ),
+                workerName: params.getParam(
+                  'workerName',
+                  ParamType.String,
+                ),
+                workerImage: params.getParam(
+                  'workerImage',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'service_requests',
+              path: 'serviceRequests',
+              builder: (context, params) => const ServiceRequestsWidget(),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
-        FFRoute(
-          name: 'ongoing_service_requests',
-          path: '/ongoingServiceRequests',
-          builder: (context, params) => const OngoingServiceRequestsWidget(),
-        ),
-        FFRoute(
-          name: 'completed_service_requests',
-          path: '/completedServiceRequests',
-          builder: (context, params) => const CompletedServiceRequestsWidget(),
-        ),
-        FFRoute(
-          name: 'rejected_service_requests',
-          path: '/rejectedServiceRequests',
-          builder: (context, params) => const RejectedServiceRequestsWidget(),
-        ),
-        FFRoute(
-          name: 'splash_screen',
-          path: '/splashScreen',
-          builder: (context, params) => const SplashScreenWidget(),
-        ),
-        FFRoute(
-          name: 'completed_request',
-          path: '/completedRequest',
-          builder: (context, params) => const CompletedRequestWidget(),
-        ),
-        FFRoute(
-          name: 'ongoing_request',
-          path: '/ongoingRequest',
-          builder: (context, params) => OngoingRequestWidget(
-            requestId: params.getParam(
-              'requestId',
-              ParamType.String,
-            ),
-            maintenanceType: params.getParam(
-              'maintenanceType',
-              ParamType.String,
-            ),
-            description: params.getParam(
-              'description',
-              ParamType.String,
-            ),
-            images: params.getParam(
-              'images',
-              ParamType.String,
-            ),
-            availableTime: params.getParam(
-              'availableTime',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'ongoing_service_provider-profile',
-          path: '/ongoingServiceProviderProfile',
-          builder: (context, params) => OngoingServiceProviderProfileWidget(
-            workerName: params.getParam(
-              'workerName',
-              ParamType.String,
-            ),
-            workerImage: params.getParam(
-              'workerImage',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'test',
-          path: '/test',
-          builder: (context, params) => const TestWidget(),
-        ),
-        FFRoute(
-          name: 'pending_service_requestsCopy',
-          path: '/pendingServiceRequestsCopy',
-          builder: (context, params) => const PendingServiceRequestsCopyWidget(),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -532,7 +494,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/pendingServiceRequestsCopy';
+            return '/signIn';
           }
           return null;
         },

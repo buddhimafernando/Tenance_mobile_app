@@ -1,13 +1,18 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
-import '/widgets/custom_dropdown/custom_dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'delete_dialog_model.dart';
 export 'delete_dialog_model.dart';
 
 class DeleteDialogWidget extends StatefulWidget {
-  const DeleteDialogWidget({super.key});
+  const DeleteDialogWidget({
+    super.key,
+    required this.serviceRequestId,
+  });
+
+  final String? serviceRequestId;
 
   @override
   State<DeleteDialogWidget> createState() => _DeleteDialogWidgetState();
@@ -41,7 +46,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 295.0,
-      height: 299.0,
+      height: 250.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(8.0),
@@ -80,14 +85,6 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget> {
                   ),
             ),
           ),
-          wrapWithModel(
-            model: _model.customDropdownModel,
-            updateCallback: () => safeSetState(() {}),
-            child: const CustomDropdownWidget(
-              hintText: 'Reason',
-              label: 'Reason',
-            ),
-          ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Row(
@@ -118,12 +115,54 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget> {
                       buttonLabel: 'Cancel',
                       buttonColor: FlutterFlowTheme.of(context).error,
                       borderColor: FlutterFlowTheme.of(context).error,
-                      routeTo: () async {},
+                      routeTo: () async {
+                        _model.apiResultgme =
+                            await DeleteServiceRequestCall.call(
+                          serviceRequestId: widget.serviceRequestId,
+                        );
+
+                        if ((_model.apiResultgme?.succeeded ?? true)) {
+                          Navigator.pop(context);
+                          context.safePop();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Failed to delete service request.',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).error,
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+
+                        safeSetState(() {});
+                      },
                     ),
                   ),
                 ),
               ].divide(const SizedBox(width: 10.0)),
             ),
+          ),
+          Text(
+            valueOrDefault<String>(
+              widget.serviceRequestId,
+              'requestId',
+            ),
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Inter',
+                  letterSpacing: 0.0,
+                ),
           ),
         ],
       ),

@@ -10,12 +10,22 @@ export 'ongoing_service_provider_profile_model.dart';
 class OngoingServiceProviderProfileWidget extends StatefulWidget {
   const OngoingServiceProviderProfileWidget({
     super.key,
+    required this.agreementId,
+    required this.serviceProviderId,
+    required this.providedServices,
+    required this.mobileNumber,
+    required this.email,
     String? workerName,
     String? workerImage,
   })  : workerName = workerName ?? 'workerName',
         workerImage = workerImage ??
             'https://www.nicepng.com/png/detail/913-9133404_plumbing-installation-amp-plumber.png';
 
+  final String? agreementId;
+  final String? serviceProviderId;
+  final String? providedServices;
+  final String? mobileNumber;
+  final String? email;
   final String workerName;
   final String workerImage;
 
@@ -66,8 +76,8 @@ class _OngoingServiceProviderProfileWidgetState
                 color: FlutterFlowTheme.of(context).info,
                 size: 20.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                context.safePop();
               },
             ),
           ),
@@ -108,14 +118,14 @@ class _OngoingServiceProviderProfileWidgetState
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            10.0, 0.0, 10.0, 0.0),
+                            10.0, 10.0, 10.0, 10.0),
                         child: wrapWithModel(
                           model: _model.iconLabelButtonModel1,
                           updateCallback: () => safeSetState(() {}),
@@ -125,6 +135,7 @@ class _OngoingServiceProviderProfileWidgetState
                               color: FlutterFlowTheme.of(context).alternate,
                             ),
                             iconLabel: 'Send email',
+                            height: 100.0,
                           ),
                         ),
                       ),
@@ -137,7 +148,7 @@ class _OngoingServiceProviderProfileWidgetState
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            10.0, 0.0, 10.0, 0.0),
+                            10.0, 10.0, 10.0, 10.0),
                         child: wrapWithModel(
                           model: _model.iconLabelButtonModel2,
                           updateCallback: () => safeSetState(() {}),
@@ -147,6 +158,7 @@ class _OngoingServiceProviderProfileWidgetState
                               color: FlutterFlowTheme.of(context).alternate,
                             ),
                             iconLabel: 'Send chat',
+                            height: 100.0,
                           ),
                         ),
                       ),
@@ -159,7 +171,7 @@ class _OngoingServiceProviderProfileWidgetState
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            10.0, 0.0, 10.0, 0.0),
+                            10.0, 10.0, 10.0, 10.0),
                         child: wrapWithModel(
                           model: _model.iconLabelButtonModel3,
                           updateCallback: () => safeSetState(() {}),
@@ -169,6 +181,7 @@ class _OngoingServiceProviderProfileWidgetState
                               color: FlutterFlowTheme.of(context).alternate,
                             ),
                             iconLabel: 'Get a call',
+                            height: 100.0,
                           ),
                         ),
                       ),
@@ -178,43 +191,41 @@ class _OngoingServiceProviderProfileWidgetState
                 wrapWithModel(
                   model: _model.labelAndContentModel1,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
-                    label: 'About',
-                    content:
-                        'Hi, I\'m Steeve, your friendly neighborhood plumber with over 11 years of experience in fixing leaks, unclogging drains, and keeping your pipes in top shape. I\'m dedicated to providing reliable and efficient plumbing services to ensure your home\'s comfort and safety.',
+                  child: LabelAndContentWidget(
+                    label: 'Agreement id',
+                    content: widget.agreementId,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel2,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
-                    label: 'Location',
-                    content: 'Burmingham',
+                  child: LabelAndContentWidget(
+                    label: 'Service provider id',
+                    content: widget.serviceProviderId,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel3,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
-                    label: 'Professional title',
-                    content: 'Licenced plumber',
+                  child: LabelAndContentWidget(
+                    label: 'Provided services',
+                    content: widget.providedServices,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel4,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
-                    label: 'Languages spoken',
-                    content: 'Fluent in english and spanish',
+                  child: LabelAndContentWidget(
+                    label: 'Mobile number',
+                    content: widget.mobileNumber,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel5,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
-                    label: 'Availibility',
-                    content:
-                        'Available Monday through Friday, 8:00 AM to 5:00 PM. Emergency services available evenings and weekends.',
+                  child: LabelAndContentWidget(
+                    label: 'Email',
+                    content: widget.email,
                   ),
                 ),
               ],

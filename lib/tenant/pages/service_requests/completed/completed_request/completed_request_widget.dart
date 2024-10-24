@@ -343,7 +343,9 @@ class _CompletedRequestWidgetState extends State<CompletedRequestWidget> {
                                 child: GestureDetector(
                                   onTap: () =>
                                       FocusScope.of(dialogContext).unfocus(),
-                                  child: const DeleteDialogWidget(),
+                                  child: const DeleteDialogWidget(
+                                    serviceRequestId: '',
+                                  ),
                                 ),
                               );
                             },

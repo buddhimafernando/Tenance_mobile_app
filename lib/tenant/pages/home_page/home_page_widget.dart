@@ -3,12 +3,19 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/horizontal_carousal/horizontal_carousal_widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+  const HomePageWidget({
+    super.key,
+    String? tenantId,
+  }) : tenantId = tenantId ?? '12345';
+
+  final String tenantId;
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -36,6 +43,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
     final chartPieChartColorsList = [
       FlutterFlowTheme.of(context).primary,
       const Color(0x9946BDDC),
@@ -83,8 +91,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-                Text(
-                  'Olivia Rhye',
+                AutoSizeText(
+                  FFAppState().userName,
+                  maxLines: 2,
                   style: FlutterFlowTheme.of(context).displayLarge.override(
                         fontFamily: 'Inter',
                         letterSpacing: 0.0,
@@ -194,7 +203,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('pending_service_requests');
+                        context.pushNamed('service_requests');
                       },
                       child: Container(
                         width: 100.0,

@@ -75,8 +75,8 @@ class _RequestTypesHeaderWidgetState extends State<RequestTypesHeaderWidget> {
           ),
         ),
         FFButtonWidget(
-          onPressed: () async {
-            context.pushNamed('ongoing_service_requests');
+          onPressed: () {
+            print('Button pressed ...');
           },
           text: 'Ongoing',
           options: FFButtonOptions(

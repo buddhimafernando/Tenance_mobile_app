@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_textfield/custom_textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'update_profile_model.dart';
 export 'update_profile_model.dart';
 
@@ -52,6 +53,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -75,8 +78,8 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                     color: FlutterFlowTheme.of(context).primary,
                     size: 20.0,
                   ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
+                  onPressed: () async {
+                    Navigator.pop(context);
                   },
                 ),
               ),
@@ -156,37 +159,47 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                   child: wrapWithModel(
                     model: _model.customTextfieldModel1,
                     updateCallback: () => safeSetState(() {}),
-                    child: const CustomTextfieldWidget(
-                      label: 'Mobile number',
+                    child: CustomTextfieldWidget(
+                      hintLabel: FFAppState().agreemantId,
+                      label: 'Agreemant id',
+                      password: false,
                     ),
                   ),
                 ),
                 wrapWithModel(
                   model: _model.customTextfieldModel2,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomTextfieldWidget(
-                    label: 'Email',
+                  child: CustomTextfieldWidget(
+                    hintLabel: FFAppState().tenantId,
+                    label: 'Tenant id',
+                    password: false,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.customTextfieldModel3,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomTextfieldWidget(
+                  child: CustomTextfieldWidget(
+                    hintLabel: FFAppState().mobileNumber,
                     label: 'Mobile number',
+                    password: false,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.customTextfieldModel4,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomTextfieldWidget(
+                  child: CustomTextfieldWidget(
+                    hintLabel: FFAppState().email,
                     label: 'Email',
+                    password: false,
                   ),
                 ),
                 wrapWithModel(
                   model: _model.customTextfieldModel5,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomTextfieldWidget(
+                  child: CustomTextfieldWidget(
+                    hintLabel: FFAppState().userName,
                     label: 'Username',
+                    password: false,
                   ),
                 ),
                 Padding(

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -18,6 +19,7 @@ class OngoingRequestWidget extends StatefulWidget {
     required this.description,
     required this.images,
     required this.availableTime,
+    required this.serviceProviderId,
   });
 
   final String? requestId;
@@ -25,6 +27,7 @@ class OngoingRequestWidget extends StatefulWidget {
   final String? description;
   final String? images;
   final String? availableTime;
+  final String? serviceProviderId;
 
   @override
   State<OngoingRequestWidget> createState() => _OngoingRequestWidgetState();
@@ -106,8 +109,9 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   child: wrapWithModel(
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
-                    child: const LabelAndContentWidget(
-                      label: 'Tenant',
+                    child: LabelAndContentWidget(
+                      label: 'Request id',
+                      content: widget.description,
                     ),
                   ),
                 ),
@@ -115,7 +119,7 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   model: _model.labelAndContentModel2,
                   updateCallback: () => safeSetState(() {}),
                   child: const LabelAndContentWidget(
-                    label: 'Tenant id',
+                    label: 'Maintenance type',
                     content: '12345678',
                   ),
                 ),
@@ -125,7 +129,7 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                     model: _model.labelAndContentModel3,
                     updateCallback: () => safeSetState(() {}),
                     child: const LabelAndContentWidget(
-                      label: 'Plumbing Status',
+                      label: 'Description',
                       content:
                           'Dripping faucet in bathroom, wasting water, causing annoyance. Urgent fix needed to conserve precious resources and prevent potential water damage.....',
                     ),
@@ -240,96 +244,154 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
                   child: Text(
-                    'Status',
+                    'Service provider',
                     style: FlutterFlowTheme.of(context).displayLarge.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
                         ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/proflow-plumbing.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'AquaTech plumbing',
-                                style: FlutterFlowTheme.of(context)
-                                    .displayMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
+                Container(
+                  decoration: const BoxDecoration(),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 40.0,
+                              height: 40.0,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
                               ),
-                              Text(
-                                'olivia@gmail.com',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
+                              child: Image.asset(
+                                'assets/images/proflow-plumbing.png',
+                                fit: BoxFit.cover,
                               ),
-                            ],
-                          ),
-                        ].divide(const SizedBox(width: 20.0)),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FlutterFlowIconButton(
-                            borderColor: FlutterFlowTheme.of(context).accent1,
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).alternate,
-                            icon: Icon(
-                              Icons.person,
-                              color: FlutterFlowTheme.of(context).accent1,
-                              size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                          FlutterFlowIconButton(
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: Icon(
-                              Icons.chat_bubble,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'AquaTech plumbing',
+                                  style: FlutterFlowTheme.of(context)
+                                      .displayMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                Text(
+                                  'olivia@gmail.com',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ],
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ].divide(const SizedBox(width: 20.0)),
-                      ),
-                    ],
+                          ].divide(const SizedBox(width: 20.0)),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderColor: FlutterFlowTheme.of(context).accent1,
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).alternate,
+                              icon: Icon(
+                                Icons.person,
+                                color: FlutterFlowTheme.of(context).accent1,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                _model.apiResultw39 =
+                                    await FindServiceProviderDetailsCall.call(
+                                  serviceProviderId: widget.serviceProviderId,
+                                );
+
+                                if ((_model.apiResultw39?.succeeded ?? true)) {
+                                  context.pushNamed(
+                                    'ongoing_service_provider-profile',
+                                    queryParameters: {
+                                      'agreementId': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.AgreemantId''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                      'serviceProviderId': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.ServiceProviderId''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                      'providedServices': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.ServiceType''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                      'mobileNumber': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.Phone''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                      'email': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.Email''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                      'workerName': serializeParam(
+                                        getJsonField(
+                                          (_model.apiResultw39?.jsonBody ?? ''),
+                                          r'''$.Name''',
+                                        ).toString(),
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                }
+
+                                safeSetState(() {});
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.chat_bubble,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
+                            ),
+                          ].divide(const SizedBox(width: 20.0)),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -392,7 +454,10 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                                         onTap: () =>
                                             FocusScope.of(dialogContext)
                                                 .unfocus(),
-                                        child: const MarkAsCompleteDialogWidget(),
+                                        child: MarkAsCompleteDialogWidget(
+                                          serviceRequestId: widget.requestId!,
+                                          status: 'Completed',
+                                        ),
                                       ),
                                     );
                                   },

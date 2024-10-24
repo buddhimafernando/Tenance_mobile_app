@@ -128,7 +128,7 @@ class FindAllCompletedServiceRequestsCall {
 
 class FindTenantDetailsCall {
   static Future<ApiCallResponse> call({
-    String? tenantId = '12345',
+    String? tenantId = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'findTenantDetails',
@@ -208,6 +208,7 @@ class CreateInquiryCall {
     String? tenantId = '',
     String? propertyId = '',
     bool? deleted,
+    String? subject = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -218,7 +219,8 @@ class CreateInquiryCall {
   "Message": "$message",
   "TenantId": "$tenantId",
   "PropertyId": "$propertyId",
-  "Deleted": $deleted
+  "Deleted": $deleted,
+  "Subject": "$subject"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'createInquiry',
@@ -229,6 +231,78 @@ class CreateInquiryCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DeleteServiceRequestCall {
+  static Future<ApiCallResponse> call({
+    String? serviceRequestId = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteServiceRequest',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/servicemanagement-app1174/delete/servicerequest',
+      callType: ApiCallType.DELETE,
+      headers: {},
+      params: {
+        'serviceRequestId': serviceRequestId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateServiceRequestStatusCall {
+  static Future<ApiCallResponse> call({
+    String? serviceRequestId = '',
+    String? status = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateServiceRequestStatus',
+      apiUrl:
+          'https://servicemanagement-app1174.demo.cgaas.ai/ServiceManagement/api/PatchRequestHistoryByStatus',
+      callType: ApiCallType.PATCH,
+      headers: {},
+      params: {
+        'ServiceRequestId': serviceRequestId,
+        'Status': status,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindServiceProviderDetailsCall {
+  static Future<ApiCallResponse> call({
+    String? serviceProviderId = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'findServiceProviderDetails',
+      apiUrl:
+          'https://servicemanagement-app1174.demo.cgaas.ai/ServiceManagement/api/FindServiceProvider',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'serviceProviderId': serviceProviderId,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

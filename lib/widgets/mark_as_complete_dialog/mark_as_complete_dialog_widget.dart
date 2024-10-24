@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
@@ -7,7 +8,14 @@ import 'mark_as_complete_dialog_model.dart';
 export 'mark_as_complete_dialog_model.dart';
 
 class MarkAsCompleteDialogWidget extends StatefulWidget {
-  const MarkAsCompleteDialogWidget({super.key});
+  const MarkAsCompleteDialogWidget({
+    super.key,
+    required this.serviceRequestId,
+    required this.status,
+  });
+
+  final String? serviceRequestId;
+  final String? status;
 
   @override
   State<MarkAsCompleteDialogWidget> createState() =>
@@ -121,7 +129,21 @@ class _MarkAsCompleteDialogWidgetState
                       buttonLabel: 'Yes',
                       buttonColor: FlutterFlowTheme.of(context).primary,
                       borderColor: FlutterFlowTheme.of(context).primary,
-                      routeTo: () async {},
+                      routeTo: () async {
+                        _model.apiResult2uk =
+                            await UpdateServiceRequestStatusCall.call(
+                          serviceRequestId: widget.serviceRequestId,
+                          status: widget.status,
+                        );
+
+                        if ((_model.apiResult2uk?.succeeded ?? true)) {
+                          Navigator.pop(context);
+                        } else {
+                          Navigator.pop(context);
+                        }
+
+                        safeSetState(() {});
+                      },
                     ),
                   ),
                 ),

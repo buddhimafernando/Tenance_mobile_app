@@ -121,7 +121,9 @@ class _MarkAsIncompleteDialogWidgetState
                       buttonLabel: 'Yes',
                       buttonColor: FlutterFlowTheme.of(context).error,
                       borderColor: FlutterFlowTheme.of(context).error,
-                      routeTo: () async {},
+                      routeTo: () async {
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
                 ),

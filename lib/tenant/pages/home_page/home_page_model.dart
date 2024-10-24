@@ -6,12 +6,7 @@ import 'package:flutter/material.dart';
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  Local state fields for this page.
 
-  List<String> pieChartlabels = [
-    'Hello World',
-    'Hello World',
-    'Hello World',
-    'Hello World'
-  ];
+  List<String> pieChartlabels = ['Pending', 'Ongoing', 'Completed', 'Rejected'];
   void addToPieChartlabels(String item) => pieChartlabels.add(item);
   void removeFromPieChartlabels(String item) => pieChartlabels.remove(item);
   void removeAtIndexFromPieChartlabels(int index) =>

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_textfield/custom_textfield_widget.dart';
@@ -14,6 +15,8 @@ class MarkAsCompleteDialogModel
   late CustomButtonModel customButtonModel1;
   // Model for custom_button component.
   late CustomButtonModel customButtonModel2;
+  // Stores action output result for [Backend Call - API (updateServiceRequestStatus)] action in custom_button widget.
+  ApiCallResponse? apiResult2uk;
 
   @override
   void initState(BuildContext context) {
