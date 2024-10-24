@@ -313,6 +313,41 @@ class FindServiceProviderDetailsCall {
   }
 }
 
+class UpdateUserDetailsCall {
+  static Future<ApiCallResponse> call({
+    String? agreemantId = '',
+    String? tenantId = '',
+    String? mobileNumber = '',
+    String? email = '',
+    String? username = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "AgreementId": "$agreemantId",
+  "TenantId": "$tenantId",
+  "Name": "$username",
+  "Email": "$email",
+  "PhoneNumber": "$mobileNumber"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateUserDetails',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/tenantmanagement-app1175/update/tenant',
+      callType: ApiCallType.PUT,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -561,6 +561,7 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                                     context.pushNamed(
                                                         'completed_request');
                                                   },
+                                                  popUp: () async {},
                                                 ),
                                               );
                                             },

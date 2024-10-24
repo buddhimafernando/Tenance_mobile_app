@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class NewRequestModel extends FlutterFlowModel<NewRequestWidget> {
   ///  Local state fields for this page.
 
-  List<String> dropDown = ['Hi', 'Hello', 'wanakkam'];
+  List<String> dropDown = ['Type 1', 'Type 2', 'Type 3'];
   void addToDropDown(String item) => dropDown.add(item);
   void removeFromDropDown(String item) => dropDown.remove(item);
   void removeAtIndexFromDropDown(int index) => dropDown.removeAt(index);

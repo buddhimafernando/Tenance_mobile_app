@@ -59,7 +59,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   size: 20.0,
                 ),
                 onPressed: () async {
-                  context.pop();
+                  Navigator.pop(context);
                 },
               ),
             ),

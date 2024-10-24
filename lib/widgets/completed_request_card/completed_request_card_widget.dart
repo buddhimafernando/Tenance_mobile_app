@@ -13,6 +13,7 @@ class CompletedRequestCardWidget extends StatefulWidget {
     String? content,
     required this.name,
     required this.navigateTo,
+    required this.popUp,
   })  : request = request ?? 'request',
         content = content ?? 'content';
 
@@ -20,6 +21,7 @@ class CompletedRequestCardWidget extends StatefulWidget {
   final String content;
   final String? name;
   final Future Function()? navigateTo;
+  final Future Function()? popUp;
 
   @override
   State<CompletedRequestCardWidget> createState() =>
@@ -156,7 +158,9 @@ class _CompletedRequestCardWidgetState
                                     FlutterFlowTheme.of(context).primary,
                                 buttonWidth: 110.0,
                                 buttonHeight: 40.0,
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  await widget.popUp?.call();
+                                },
                               ),
                             ),
                           ],
