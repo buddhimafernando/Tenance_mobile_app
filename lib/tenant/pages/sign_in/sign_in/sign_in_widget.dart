@@ -42,6 +42,7 @@ class _SignInWidgetState extends State<SignInWidget> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
@@ -64,200 +65,202 @@ class _SignInWidgetState extends State<SignInWidget> {
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: const AlignmentDirectional(-1.0, 0.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
-                  child: Text(
-                    'Sign In',
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            top: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+                    child: Text(
+                      'Sign In',
+                      style: FlutterFlowTheme.of(context).headlineLarge.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(-1.0, 0.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'Start your journey with affordable price',
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                          fontFamily: 'Inter',
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          letterSpacing: 0.0,
-                        ),
+                Align(
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 0.0, 0.0),
+                    child: Text(
+                      'Start your journey with affordable price',
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            fontFamily: 'Inter',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            letterSpacing: 0.0,
+                          ),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
-                child: wrapWithModel(
-                  model: _model.customTextfieldModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: const CustomTextfieldWidget(
-                    hintLabel: 'Enter your email',
-                    label: 'Email',
-                    password: false,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.customTextfieldModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const CustomTextfieldWidget(
+                      hintLabel: 'Enter your email',
+                      label: 'Email',
+                      password: false,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
-                child: wrapWithModel(
-                  model: _model.passwordFieldModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: const PasswordFieldWidget(
-                    label: 'Password',
-                    hint: 'Enter your password',
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                  child: wrapWithModel(
+                    model: _model.passwordFieldModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const PasswordFieldWidget(
+                      label: 'Password',
+                      hint: 'Enter your password',
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(1.0, 0.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                  child: Text(
-                    'Forgot password?',
-                    style: FlutterFlowTheme.of(context).displayMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
+                Align(
+                  alignment: const AlignmentDirectional(1.0, 0.0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                    child: Text(
+                      'Forgot password?',
+                      style: FlutterFlowTheme.of(context).displayMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
-                child: wrapWithModel(
-                  model: _model.customButtonModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: CustomButtonWidget(
-                    buttonLabel: 'Sign in',
-                    routeTo: () async {
-                      await authManager.refreshUser();
-                      GoRouter.of(context).prepareAuthEvent();
-
-                      final user = await authManager.signInWithEmail(
-                        context,
-                        _model.customTextfieldModel.textController.text,
-                        _model.passwordFieldModel.textController.text,
-                      );
-                      if (user == null) {
-                        return;
-                      }
-
-                      if (currentUserEmailVerified) {
-                        _model.apiResulta8f = await FindTenantDetailsCall.call(
-                          tenantId: currentUserUid,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.customButtonModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: CustomButtonWidget(
+                      buttonLabel: 'Sign in',
+                      routeTo: () async {
+                        await authManager.refreshUser();
+                        GoRouter.of(context).prepareAuthEvent();
+          
+                        final user = await authManager.signInWithEmail(
+                          context,
+                          _model.customTextfieldModel.textController.text,
+                          _model.passwordFieldModel.textController.text,
                         );
-
-                        if ((_model.apiResulta8f?.succeeded ?? true)) {
-                          FFAppState().email = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
-                            r'''$.Email''',
-                          ).toString();
-                          FFAppState().userName = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
-                            r'''$.Name''',
-                          ).toString();
-                          FFAppState().tenantId = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
-                            r'''$.TenantId''',
-                          ).toString();
-                          FFAppState().mobileNumber = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
-                            r'''$.PhoneNumber''',
-                          ).toString();
-                          safeSetState(() {});
-
-                          context.pushNamedAuth(
-                            'homePage',
-                            context.mounted,
-                            queryParameters: {
-                              'tenantId': serializeParam(
-                                '',
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
+                        if (user == null) {
+                          return;
+                        }
+          
+                        if (currentUserEmailVerified) {
+                          _model.apiResulta8f = await FindTenantDetailsCall.call(
+                            tenantId: currentUserUid,
                           );
+          
+                          if ((_model.apiResulta8f?.succeeded ?? true)) {
+                            FFAppState().email = getJsonField(
+                              (_model.apiResulta8f?.jsonBody ?? ''),
+                              r'''$.Email''',
+                            ).toString();
+                            FFAppState().userName = getJsonField(
+                              (_model.apiResulta8f?.jsonBody ?? ''),
+                              r'''$.Name''',
+                            ).toString();
+                            FFAppState().tenantId = getJsonField(
+                              (_model.apiResulta8f?.jsonBody ?? ''),
+                              r'''$.TenantId''',
+                            ).toString();
+                            FFAppState().mobileNumber = getJsonField(
+                              (_model.apiResulta8f?.jsonBody ?? ''),
+                              r'''$.PhoneNumber''',
+                            ).toString();
+                            safeSetState(() {});
+          
+                            context.pushNamedAuth(
+                              'homePage',
+                              context.mounted,
+                              queryParameters: {
+                                'tenantId': serializeParam(
+                                  '',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Failed to login!',
+                                  style: TextStyle(
+                                    color:
+                                        FlutterFlowTheme.of(context).primaryText,
+                                  ),
+                                ),
+                                duration: const Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).error,
+                              ),
+                            );
+                          }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Failed to login!',
-                                style: TextStyle(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
+                                'failed to log in!',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                               duration: const Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).error,
+                              backgroundColor: FlutterFlowTheme.of(context).error,
                             ),
                           );
                         }
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'failed to log in!',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                            duration: const Duration(milliseconds: 4000),
-                            backgroundColor: FlutterFlowTheme.of(context).error,
-                          ),
-                        );
-                      }
-
-                      safeSetState(() {});
-                    },
+          
+                        safeSetState(() {});
+                      },
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                      Text(
-                        'Sign Up',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              color: FlutterFlowTheme.of(context).primary,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                    ].divide(const SizedBox(width: 10.0)),
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don\'t have an account?',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        Text(
+                          'Sign Up',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Inter',
+                                color: FlutterFlowTheme.of(context).primary,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ].divide(const SizedBox(width: 10.0)),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
