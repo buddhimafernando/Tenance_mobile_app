@@ -3,11 +3,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/available_time_chip/available_time_chip_widget.dart';
-import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/label_and_content/label_and_content_widget.dart';
-import '/widgets/mark_as_complete_dialog/mark_as_complete_dialog_widget.dart';
-import '/widgets/mark_as_incomplete_dialog/mark_as_incomplete_dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'ongoing_request_model.dart';
 export 'ongoing_request_model.dart';
 
@@ -55,6 +53,8 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -95,6 +95,7 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
           ),
           actions: const [],
           centerTitle: true,
+          toolbarHeight: 100.0,
           elevation: 0.0,
         ),
         body: SafeArea(
@@ -110,17 +111,17 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                     model: _model.labelAndContentModel1,
                     updateCallback: () => safeSetState(() {}),
                     child: LabelAndContentWidget(
-                      label: 'Request id',
-                      content: widget.description,
+                      label: 'Tenant',
+                      content: FFAppState().userName,
                     ),
                   ),
                 ),
                 wrapWithModel(
                   model: _model.labelAndContentModel2,
                   updateCallback: () => safeSetState(() {}),
-                  child: const LabelAndContentWidget(
+                  child: LabelAndContentWidget(
                     label: 'Maintenance type',
-                    content: '12345678',
+                    content: widget.maintenanceType,
                   ),
                 ),
                 Padding(
@@ -128,10 +129,9 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                   child: wrapWithModel(
                     model: _model.labelAndContentModel3,
                     updateCallback: () => safeSetState(() {}),
-                    child: const LabelAndContentWidget(
+                    child: LabelAndContentWidget(
                       label: 'Description',
-                      content:
-                          'Dripping faucet in bathroom, wasting water, causing annoyance. Urgent fix needed to conserve precious resources and prevent potential water damage.....',
+                      content: widget.description,
                     ),
                   ),
                 ),
@@ -329,7 +329,7 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                                       'agreementId': serializeParam(
                                         getJsonField(
                                           (_model.apiResultw39?.jsonBody ?? ''),
-                                          r'''$.AgreemantId''',
+                                          r'''$.AgreementId''',
                                         ).toString(),
                                         ParamType.String,
                                       ),
@@ -392,82 +392,6 @@ class _OngoingRequestWidgetState extends State<OngoingRequestWidget> {
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 40.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Builder(
-                          builder: (context) => wrapWithModel(
-                            model: _model.customButtonModel1,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CustomButtonWidget(
-                              buttonLabel: 'Incomplete',
-                              buttonColor: FlutterFlowTheme.of(context).error,
-                              borderColor: FlutterFlowTheme.of(context).error,
-                              routeTo: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (dialogContext) {
-                                    return Dialog(
-                                      elevation: 0,
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      alignment: const AlignmentDirectional(0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      child: GestureDetector(
-                                        onTap: () =>
-                                            FocusScope.of(dialogContext)
-                                                .unfocus(),
-                                        child: const MarkAsIncompleteDialogWidget(),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Builder(
-                          builder: (context) => wrapWithModel(
-                            model: _model.customButtonModel2,
-                            updateCallback: () => safeSetState(() {}),
-                            child: CustomButtonWidget(
-                              buttonLabel: 'Complete',
-                              routeTo: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (dialogContext) {
-                                    return Dialog(
-                                      elevation: 0,
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      alignment: const AlignmentDirectional(0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      child: GestureDetector(
-                                        onTap: () =>
-                                            FocusScope.of(dialogContext)
-                                                .unfocus(),
-                                        child: MarkAsCompleteDialogWidget(
-                                          serviceRequestId: widget.requestId!,
-                                          status: 'Completed',
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ].divide(const SizedBox(width: 10.0)),
                   ),
                 ),
               ],

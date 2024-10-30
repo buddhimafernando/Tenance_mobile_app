@@ -60,43 +60,41 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).alternate,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            automaticallyImplyLeading: false,
-            leading: Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                child: FlutterFlowIconButton(
-                  borderRadius: 8.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).alternate,
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 20.0,
-                  ),
-                  onPressed: () async {
-                    Navigator.pop(context);
-                  },
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: Align(
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderRadius: 8.0,
+                buttonSize: 40.0,
+                fillColor: FlutterFlowTheme.of(context).alternate,
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 20.0,
                 ),
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
               ),
             ),
-            title: Text(
-              'Profile',
-              style: FlutterFlowTheme.of(context).titleMedium.override(
-                    fontFamily: 'Inter',
-                    fontSize: 24.0,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.normal,
-                  ),
-            ),
-            actions: const [],
-            centerTitle: true,
-            elevation: 0.0,
           ),
+          title: Text(
+            'Profile',
+            style: FlutterFlowTheme.of(context).titleMedium.override(
+                  fontFamily: 'Inter',
+                  fontSize: 24.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.normal,
+                ),
+          ),
+          actions: const [],
+          centerTitle: true,
+          toolbarHeight: 100.0,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
@@ -212,7 +210,9 @@ class _UpdateProfileWidgetState extends State<UpdateProfileWidget> {
                       buttonLabel: 'Update',
                       buttonColor: FlutterFlowTheme.of(context).primary,
                       labelColor: FlutterFlowTheme.of(context).alternate,
-                      routeTo: () async {},
+                      routeTo: () async {
+                        context.pushNamed('homePage');
+                      },
                     ),
                   ),
                 ),

@@ -7,6 +7,7 @@ import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_textfield/custom_textfield_widget.dart';
 import '/widgets/password_field/password_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'sign_in_model.dart';
 export 'sign_in_model.dart';
 
@@ -39,6 +40,8 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(

@@ -6,6 +6,7 @@ import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/delete_dialog/delete_dialog_widget.dart';
 import '/widgets/label_and_content/label_and_content_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pending_request_model.dart';
 export 'pending_request_model.dart';
 
@@ -53,6 +54,8 @@ class _PendingRequestWidgetState extends State<PendingRequestWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -98,6 +101,7 @@ class _PendingRequestWidgetState extends State<PendingRequestWidget> {
               ),
               actions: const [],
               centerTitle: true,
+              toolbarHeight: 100.0,
               elevation: 0.0,
             )
           ],
@@ -118,10 +122,7 @@ class _PendingRequestWidgetState extends State<PendingRequestWidget> {
                           updateCallback: () => safeSetState(() {}),
                           child: LabelAndContentWidget(
                             label: 'Tenant',
-                            content: valueOrDefault<String>(
-                              widget.tenant,
-                              'tenant',
-                            ),
+                            content: FFAppState().userName,
                           ),
                         ),
                       ),
@@ -202,8 +203,8 @@ class _PendingRequestWidgetState extends State<PendingRequestWidget> {
                             wrapWithModel(
                               model: _model.availableTimeChipModel1,
                               updateCallback: () => safeSetState(() {}),
-                              child: AvailableTimeChipWidget(
-                                time: widget.availableTime,
+                              child: const AvailableTimeChipWidget(
+                                time: '10:30 am',
                                 chipHeight: 50.0,
                               ),
                             ),

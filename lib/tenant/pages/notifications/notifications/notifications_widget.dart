@@ -79,6 +79,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
           ),
           actions: const [],
           centerTitle: true,
+          toolbarHeight: 100.0,
           elevation: 0.0,
         ),
         body: SafeArea(
@@ -89,9 +90,28 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             scrollDirection: Axis.vertical,
             children: [
               wrapWithModel(
-                model: _model.notificationCardModel,
+                model: _model.notificationCardModel1,
                 updateCallback: () => safeSetState(() {}),
-                child: const NotificationCardWidget(),
+                child: const NotificationCardWidget(
+                  date: 'Today',
+                  successMessage:
+                      'Your maintenance request has been accepted by the agent. A service provider will contact you shortly.',
+                  recieveTime: '8:40 am',
+                  recieveMessage: 'Sheron Mark sent a message to you.',
+                  time: '8.30 am',
+                ),
+              ),
+              wrapWithModel(
+                model: _model.notificationCardModel2,
+                updateCallback: () => safeSetState(() {}),
+                child: const NotificationCardWidget(
+                  date: 'Yesterday',
+                  successMessage:
+                      'Your maintenance request has been accepted by the agent. A service provider will contact you shortly.',
+                  recieveTime: '8:40 am',
+                  recieveMessage: 'Sheron Mark sent a message to you.',
+                  time: '8.30 am',
+                ),
               ),
             ],
           ),

@@ -73,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const SignInWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const SignInWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const SplashScreenWidget(),
           routes: [
             FFRoute(
               name: 'homePage',
@@ -179,6 +179,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   'time',
                   ParamType.String,
                 ),
+                propertyIdList: params.getParam<String>(
+                  'propertyIdList',
+                  ParamType.String,
+                  isList: true,
+                ),
               ),
             ),
             FFRoute(
@@ -254,7 +259,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'completed_request',
               path: 'completedRequest',
-              builder: (context, params) => const CompletedRequestWidget(),
+              builder: (context, params) => CompletedRequestWidget(
+                tenantId: params.getParam(
+                  'tenantId',
+                  ParamType.String,
+                ),
+                tenant: params.getParam(
+                  'tenant',
+                  ParamType.String,
+                ),
+                status: params.getParam(
+                  'status',
+                  ParamType.String,
+                ),
+                images: params.getParam(
+                  'images',
+                  ParamType.String,
+                ),
+                availableTime: params.getParam(
+                  'availableTime',
+                  ParamType.String,
+                ),
+              ),
             ),
             FFRoute(
               name: 'ongoing_request',
@@ -494,7 +520,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/signIn';
+            return '/splashScreen';
           }
           return null;
         },

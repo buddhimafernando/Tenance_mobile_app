@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets/available_time_chip/available_time_chip_widget.dart';
-import '/widgets/cancel_button/cancel_button_widget.dart';
 import '/widgets/status_button/status_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'ongoing_request_card_model.dart';
@@ -15,14 +14,20 @@ class OngoingRequestCardWidget extends StatefulWidget {
     required this.completePopUp,
     required this.incompletePopUp,
     required this.navigateTo,
+    String? buttonLabel,
+    Color? buttonColor,
   })  : request = request ?? 'request',
-        content = content ?? 'content';
+        content = content ?? 'content',
+        buttonLabel = buttonLabel ?? 'Pending',
+        buttonColor = buttonColor ?? const Color(0x66DCC946);
 
   final String request;
   final String content;
   final Future Function()? completePopUp;
   final Future Function()? incompletePopUp;
   final Future Function()? navigateTo;
+  final String buttonLabel;
+  final Color buttonColor;
 
   @override
   State<OngoingRequestCardWidget> createState() =>
@@ -107,9 +112,12 @@ class _OngoingRequestCardWidgetState extends State<OngoingRequestCardWidget> {
                         wrapWithModel(
                           model: _model.statusButtonModel,
                           updateCallback: () => safeSetState(() {}),
-                          child: const StatusButtonWidget(
-                            buttonColor: Color(0x5EDCB146),
-                            buttonLabel: 'Ongoing stage',
+                          child: StatusButtonWidget(
+                            buttonColor: valueOrDefault<Color>(
+                              widget.buttonColor,
+                              const Color(0x72DECF31),
+                            ),
+                            buttonLabel: widget.buttonLabel,
                           ),
                         ),
                       ],
@@ -140,42 +148,7 @@ class _OngoingRequestCardWidgetState extends State<OngoingRequestCardWidget> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            wrapWithModel(
-                              model: _model.cancelButtonModel1,
-                              updateCallback: () => safeSetState(() {}),
-                              child: CancelButtonWidget(
-                                button: 'Incomplete',
-                                fontSize: 14.0,
-                                labelColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                buttonWidth: 110.0,
-                                buttonHeight: 40.0,
-                                onPressed: () async {
-                                  await widget.incompletePopUp?.call();
-                                },
-                              ),
-                            ),
-                            wrapWithModel(
-                              model: _model.cancelButtonModel2,
-                              updateCallback: () => safeSetState(() {}),
-                              child: CancelButtonWidget(
-                                button: 'Complete',
-                                fontSize: 14.0,
-                                labelColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                buttonColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                buttonWidth: 110.0,
-                                buttonHeight: 40.0,
-                                onPressed: () async {
-                                  await widget.completePopUp?.call();
-                                },
-                              ),
-                            ),
-                          ].divide(const SizedBox(width: 10.0)),
+                          children: <Widget>[].divide(const SizedBox(width: 10.0)),
                         ),
                       ),
                       wrapWithModel(

@@ -139,7 +139,19 @@ class _MarkAsCompleteDialogWidgetState
                         if ((_model.apiResult2uk?.succeeded ?? true)) {
                           Navigator.pop(context);
                         } else {
-                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Failed to mark as completed.',
+                                style: TextStyle(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).error,
+                            ),
+                          );
                         }
 
                         safeSetState(() {});
