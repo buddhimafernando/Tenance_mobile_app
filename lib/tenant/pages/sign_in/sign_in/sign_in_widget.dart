@@ -7,6 +7,7 @@ import '/widgets/custom_button/custom_button_widget.dart';
 import '/widgets/custom_textfield/custom_textfield_widget.dart';
 import '/widgets/password_field/password_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'sign_in_model.dart';
 export 'sign_in_model.dart';
 
@@ -39,6 +40,8 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -140,7 +143,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                   child: CustomButtonWidget(
                     buttonLabel: 'Sign in',
                     routeTo: () async {
-                      await authManager.refreshUser();
                       GoRouter.of(context).prepareAuthEvent();
 
                       final user = await authManager.signInWithEmail(
@@ -152,26 +154,30 @@ class _SignInWidgetState extends State<SignInWidget> {
                         return;
                       }
 
-                      if (currentUserEmailVerified) {
-                        _model.apiResulta8f = await FindTenantDetailsCall.call(
+                      if ((_model.apiResult5z0?.succeeded ?? true)) {
+                        _model.apiResult5z0 = await FindTenantDetailsCall.call(
                           tenantId: currentUserUid,
                         );
 
-                        if ((_model.apiResulta8f?.succeeded ?? true)) {
+                        if ((_model.apiResult5z0?.succeeded ?? true)) {
                           FFAppState().email = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            (_model.apiResult5z0?.jsonBody ?? ''),
                             r'''$.Email''',
                           ).toString();
                           FFAppState().userName = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            (_model.apiResult5z0?.jsonBody ?? ''),
                             r'''$.Name''',
                           ).toString();
+                          FFAppState().agreemantId = getJsonField(
+                            (_model.apiResult5z0?.jsonBody ?? ''),
+                            r'''$.AgreemantId''',
+                          ).toString();
                           FFAppState().tenantId = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            (_model.apiResult5z0?.jsonBody ?? ''),
                             r'''$.TenantId''',
                           ).toString();
                           FFAppState().mobileNumber = getJsonField(
-                            (_model.apiResulta8f?.jsonBody ?? ''),
+                            (_model.apiResult5z0?.jsonBody ?? ''),
                             r'''$.PhoneNumber''',
                           ).toString();
                           safeSetState(() {});
@@ -181,7 +187,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                             context.mounted,
                             queryParameters: {
                               'tenantId': serializeParam(
-                                '',
+                                FFAppState().tenantId,
                                 ParamType.String,
                               ),
                             }.withoutNulls,
@@ -190,7 +196,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Failed to login!',
+                                'Failed to login.',
                                 style: TextStyle(
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -198,7 +204,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                               ),
                               duration: const Duration(milliseconds: 4000),
                               backgroundColor:
-                                  FlutterFlowTheme.of(context).error,
+                                  FlutterFlowTheme.of(context).secondary,
                             ),
                           );
                         }
@@ -206,18 +212,14 @@ class _SignInWidgetState extends State<SignInWidget> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'failed to log in!',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    letterSpacing: 0.0,
-                                  ),
+                              'Failed to login.',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
                             ),
                             duration: const Duration(milliseconds: 4000),
-                            backgroundColor: FlutterFlowTheme.of(context).error,
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
                           ),
                         );
                       }

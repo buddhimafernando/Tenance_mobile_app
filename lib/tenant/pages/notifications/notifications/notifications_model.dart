@@ -7,15 +7,21 @@ class NotificationsModel extends FlutterFlowModel<NotificationsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for notification_card component.
-  late NotificationCardModel notificationCardModel;
+  late NotificationCardModel notificationCardModel1;
+  // Model for notification_card component.
+  late NotificationCardModel notificationCardModel2;
 
   @override
   void initState(BuildContext context) {
-    notificationCardModel = createModel(context, () => NotificationCardModel());
+    notificationCardModel1 =
+        createModel(context, () => NotificationCardModel());
+    notificationCardModel2 =
+        createModel(context, () => NotificationCardModel());
   }
 
   @override
   void dispose() {
-    notificationCardModel.dispose();
+    notificationCardModel1.dispose();
+    notificationCardModel2.dispose();
   }
 }

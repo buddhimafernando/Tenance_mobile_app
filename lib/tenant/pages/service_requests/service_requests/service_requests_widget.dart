@@ -10,6 +10,7 @@ import '/widgets/mark_as_incomplete_dialog/mark_as_incomplete_dialog_widget.dart
 import '/widgets/ongoing_request_card/ongoing_request_card_widget.dart';
 import '/widgets/pending_request_card/pending_request_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'service_requests_model.dart';
 export 'service_requests_model.dart';
 
@@ -48,6 +49,8 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -92,6 +95,7 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
           ),
           actions: const [],
           centerTitle: true,
+          toolbarHeight: 100.0,
           elevation: 0.0,
         ),
         body: SafeArea(
@@ -162,7 +166,9 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                           physics: const NeverScrollableScrollPhysics(),
                           children: [
                             FutureBuilder<ApiCallResponse>(
-                              future: FindAllPendingServiceRequestCall.call(),
+                              future: FindAllPendingServiceRequestCall.call(
+                                tenantId: FFAppState().tenantId,
+                              ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -312,8 +318,10 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   FutureBuilder<ApiCallResponse>(
-                                    future: FindAllOngoingServiceRequestsCall
-                                        .call(),
+                                    future:
+                                        FindAllOngoingServiceRequestsCall.call(
+                                      tenantId: FFAppState().tenantId,
+                                    ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
                                       if (!snapshot.hasData) {
@@ -360,10 +368,15 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                                       OngoingRequestCardWidget(
                                                     key: Key(
                                                         'Keyp38_${ongoingIndex}_of_${ongoing.length}'),
+                                                    request: getJsonField(
+                                                      ongoingItem,
+                                                      r'''$.MaintenanceRequest.MaintenanceType''',
+                                                    ).toString(),
                                                     content: getJsonField(
                                                       ongoingItem,
                                                       r'''$.MaintenanceRequest.Notes''',
                                                     ).toString(),
+                                                    buttonLabel: 'Ongoing',
                                                     completePopUp: () async {
                                                       await showDialog(
                                                         context: context,
@@ -502,7 +515,9 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                 children: [
                                   FutureBuilder<ApiCallResponse>(
                                     future: FindAllCompletedServiceRequestsCall
-                                        .call(),
+                                        .call(
+                                      tenantId: FFAppState().tenantId,
+                                    ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
                                       if (!snapshot.hasData) {
@@ -559,7 +574,47 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                                   name: 'dwc',
                                                   navigateTo: () async {
                                                     context.pushNamed(
-                                                        'completed_request');
+                                                      'completed_request',
+                                                      queryParameters: {
+                                                        'tenantId':
+                                                            serializeParam(
+                                                          getJsonField(
+                                                            completedItem,
+                                                            r'''$.MaintenanceRequest.TenantId''',
+                                                          ).toString(),
+                                                          ParamType.String,
+                                                        ),
+                                                        'tenant':
+                                                            serializeParam(
+                                                          getJsonField(
+                                                            completedItem,
+                                                            r'''$.MaintenanceRequest.Name''',
+                                                          ).toString(),
+                                                          ParamType.String,
+                                                        ),
+                                                        'status':
+                                                            serializeParam(
+                                                          getJsonField(
+                                                            completedItem,
+                                                            r'''$.MaintenanceRequest.Notes''',
+                                                          ).toString(),
+                                                          ParamType.String,
+                                                        ),
+                                                        'images':
+                                                            serializeParam(
+                                                          '',
+                                                          ParamType.String,
+                                                        ),
+                                                        'availableTime':
+                                                            serializeParam(
+                                                          getJsonField(
+                                                            completedItem,
+                                                            r'''$.MaintenanceRequest.AvailableTime''',
+                                                          ).toString(),
+                                                          ParamType.String,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
                                                   },
                                                   popUp: () async {},
                                                 ),
@@ -573,10 +628,252 @@ class _ServiceRequestsWidgetState extends State<ServiceRequestsWidget>
                                 ],
                               ),
                             ),
-                            const SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [],
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 20.0, 0.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    FutureBuilder<ApiCallResponse>(
+                                      future: FindAllRejectedServiceRequestsCall
+                                          .call(
+                                        tenantId: FFAppState().tenantId,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        final listViewFindAllRejectedServiceRequestsResponse =
+                                            snapshot.data!;
+
+                                        return Builder(
+                                          builder: (context) {
+                                            final rejected = getJsonField(
+                                              listViewFindAllRejectedServiceRequestsResponse
+                                                  .jsonBody,
+                                              r'''$''',
+                                            ).toList();
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: rejected.length,
+                                              itemBuilder:
+                                                  (context, rejectedIndex) {
+                                                final rejectedItem =
+                                                    rejected[rejectedIndex];
+                                                return Builder(
+                                                  builder: (context) => Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 20.0,
+                                                                0.0, 0.0),
+                                                    child: FutureBuilder<
+                                                        ApiCallResponse>(
+                                                      future:
+                                                          FindAllRejectedServiceRequestsCall
+                                                              .call(
+                                                        tenantId: FFAppState()
+                                                            .tenantId,
+                                                      ),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50.0,
+                                                              height: 50.0,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                valueColor:
+                                                                    AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                        final ongoingRequestCardFindAllRejectedServiceRequestsResponse =
+                                                            snapshot.data!;
+
+                                                        return OngoingRequestCardWidget(
+                                                          key: Key(
+                                                              'Keyunj_${rejectedIndex}_of_${rejected.length}'),
+                                                          request: getJsonField(
+                                                            rejectedItem,
+                                                            r'''$.MaintenanceRequest.MaintenanceType''',
+                                                          ).toString(),
+                                                          content: getJsonField(
+                                                            rejectedItem,
+                                                            r'''$.MaintenanceRequest.Notes''',
+                                                          ).toString(),
+                                                          buttonLabel:
+                                                              'Rejected',
+                                                          buttonColor:
+                                                              const Color(0x8EF04E4E),
+                                                          completePopUp:
+                                                              () async {
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (dialogContext) {
+                                                                return Dialog(
+                                                                  elevation: 0,
+                                                                  insetPadding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  alignment: const AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () =>
+                                                                        FocusScope.of(dialogContext)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        MarkAsCompleteDialogWidget(
+                                                                      serviceRequestId:
+                                                                          getJsonField(
+                                                                        rejectedItem,
+                                                                        r'''$.ServiceRequestId''',
+                                                                      ).toString(),
+                                                                      status:
+                                                                          'Completed',
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          incompletePopUp:
+                                                              () async {
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (dialogContext) {
+                                                                return Dialog(
+                                                                  elevation: 0,
+                                                                  insetPadding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  alignment: const AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0)
+                                                                      .resolve(
+                                                                          Directionality.of(
+                                                                              context)),
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () =>
+                                                                        FocusScope.of(dialogContext)
+                                                                            .unfocus(),
+                                                                    child:
+                                                                        const MarkAsIncompleteDialogWidget(),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          navigateTo: () async {
+                                                            context.pushNamed(
+                                                              'ongoing_request',
+                                                              queryParameters: {
+                                                                'requestId':
+                                                                    serializeParam(
+                                                                  getJsonField(
+                                                                    rejectedItem,
+                                                                    r'''$.ServiceRequestId''',
+                                                                  ).toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'maintenanceType':
+                                                                    serializeParam(
+                                                                  getJsonField(
+                                                                    rejectedItem,
+                                                                    r'''$.MaintenanceRequest.MaintenanceType''',
+                                                                  ).toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'description':
+                                                                    serializeParam(
+                                                                  getJsonField(
+                                                                    rejectedItem,
+                                                                    r'''$.MaintenanceRequest.Notes''',
+                                                                  ).toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'images':
+                                                                    serializeParam(
+                                                                  '',
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'availableTime':
+                                                                    serializeParam(
+                                                                  getJsonField(
+                                                                    rejectedItem,
+                                                                    r'''$.MaintenanceRequest.AvailableTime''',
+                                                                  ).toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'serviceProviderId':
+                                                                    serializeParam(
+                                                                  getJsonField(
+                                                                    rejectedItem,
+                                                                    r'''$.ServiceProviderId''',
+                                                                  ).toString(),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

@@ -79,16 +79,20 @@ class _NotificationCardWidgetState extends State<NotificationCardWidget> {
                           letterSpacing: 0.0,
                         ),
                   ),
-                  Text(
-                    widget.successMessage,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: Text(
+                      widget.successMessage,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
                   ),
                   Text(
                     widget.recieveTime,
-                    style: FlutterFlowTheme.of(context).displayMedium.override(
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
                         ),
@@ -106,12 +110,12 @@ class _NotificationCardWidgetState extends State<NotificationCardWidget> {
                   ),
                   Text(
                     widget.time,
-                    style: FlutterFlowTheme.of(context).displayMedium.override(
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
                         ),
                   ),
-                ].divide(const SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 5.0)),
               ),
             ),
           ),

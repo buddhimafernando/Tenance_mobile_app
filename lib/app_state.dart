@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -13,12 +14,19 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _agreemantId = prefs.getString('ff_agreemantId') ?? _agreemantId;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   DateTime? _availableTime = DateTime.fromMillisecondsSinceEpoch(1729671780000);
   DateTime? get availableTime => _availableTime;
@@ -42,6 +50,7 @@ class FFAppState extends ChangeNotifier {
   String get agreemantId => _agreemantId;
   set agreemantId(String value) {
     _agreemantId = value;
+    prefs.setString('ff_agreemantId', value);
   }
 
   String _tenantId = '';
@@ -55,4 +64,45 @@ class FFAppState extends ChangeNotifier {
   set mobileNumber(String value) {
     _mobileNumber = value;
   }
+
+  List<double> _chartValues = [];
+  List<double> get chartValues => _chartValues;
+  set chartValues(List<double> value) {
+    _chartValues = value;
+  }
+
+  void addToChartValues(double value) {
+    chartValues.add(value);
+  }
+
+  void removeFromChartValues(double value) {
+    chartValues.remove(value);
+  }
+
+  void removeAtIndexFromChartValues(int index) {
+    chartValues.removeAt(index);
+  }
+
+  void updateChartValuesAtIndex(
+    int index,
+    double Function(double) updateFn,
+  ) {
+    chartValues[index] = updateFn(_chartValues[index]);
+  }
+
+  void insertAtIndexInChartValues(int index, double value) {
+    chartValues.insert(index, value);
+  }
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

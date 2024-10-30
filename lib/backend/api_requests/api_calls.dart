@@ -161,10 +161,11 @@ class CreateMaintainenanceRequestCall {
     String? maintenanceType = '',
     String? description = '',
     String? availableTime = '',
-    String? images = '',
     String? tenantId = '',
     String? propertyId = '',
     bool? deleted,
+    String? agentId = '',
+    String? ownerId = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -172,11 +173,10 @@ class CreateMaintainenanceRequestCall {
   "MaintenanceType": "$maintenanceType",
   "Notes": "$description",
   "AvailableTime": "$availableTime",
-  "Images": [
-    "$images"
-  ],
   "TenantId": "$tenantId",
   "PropertyId": "$propertyId",
+  "AgentId": "$agentId",
+  "OwnerId": "$ownerId",
   "Deleted": $deleted
 }''';
     return ApiManager.instance.makeApiCall(
@@ -311,6 +311,16 @@ class FindServiceProviderDetailsCall {
       alwaysAllowBody: false,
     );
   }
+
+  static List<String>? title(dynamic response) => (getJsonField(
+        response,
+        r'''$.Address''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class UpdateUserDetailsCall {
@@ -338,6 +348,56 @@ class UpdateUserDetailsCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindPropertyByTenantIdCall {
+  static Future<ApiCallResponse> call({
+    String? tenantId = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'findPropertyByTenantId',
+      apiUrl:
+          'https://property-app1176.demo.cgaas.ai/Property/api/FindallifPropertyByTenantId/TenantId',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'TenantId': tenantId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindAllRejectedServiceRequestsCall {
+  static Future<ApiCallResponse> call({
+    String? tenantId = '12345',
+    String? requestStatus = 'rejected',
+    bool? statusBoolean,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'findAllRejectedServiceRequests',
+      apiUrl:
+          'https://tyk-apim.cgaas.ai/gateway/ServiceManagement-app1174/FindallifServiceRequestByTenantId/RequestStatus',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'TenantId': tenantId,
+        'RequestStatus': requestStatus,
+        'StatusBoolean': statusBoolean,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

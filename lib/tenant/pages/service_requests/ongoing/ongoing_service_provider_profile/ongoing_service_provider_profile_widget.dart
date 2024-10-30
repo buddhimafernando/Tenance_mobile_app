@@ -84,7 +84,10 @@ class _OngoingServiceProviderProfileWidgetState
           title: Align(
             alignment: const AlignmentDirectional(-0.4, 0.0),
             child: Text(
-              widget.workerName,
+              valueOrDefault<String>(
+                widget.workerName,
+                'AquaTech Plumbing',
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Inter',
                     letterSpacing: 0.0,
@@ -193,7 +196,10 @@ class _OngoingServiceProviderProfileWidgetState
                   updateCallback: () => safeSetState(() {}),
                   child: LabelAndContentWidget(
                     label: 'Agreement id',
-                    content: widget.agreementId,
+                    content: valueOrDefault<String>(
+                      widget.agreementId,
+                      '34sdct67yvy7yvvgt8y88089',
+                    ),
                   ),
                 ),
                 wrapWithModel(
@@ -201,7 +207,10 @@ class _OngoingServiceProviderProfileWidgetState
                   updateCallback: () => safeSetState(() {}),
                   child: LabelAndContentWidget(
                     label: 'Service provider id',
-                    content: widget.serviceProviderId,
+                    content: valueOrDefault<String>(
+                      widget.serviceProviderId,
+                      'obcb823rb4382bue83ff3',
+                    ),
                   ),
                 ),
                 wrapWithModel(
@@ -209,7 +218,10 @@ class _OngoingServiceProviderProfileWidgetState
                   updateCallback: () => safeSetState(() {}),
                   child: LabelAndContentWidget(
                     label: 'Provided services',
-                    content: widget.providedServices,
+                    content: valueOrDefault<String>(
+                      widget.providedServices,
+                      'Plumbing',
+                    ),
                   ),
                 ),
                 wrapWithModel(
@@ -217,7 +229,10 @@ class _OngoingServiceProviderProfileWidgetState
                   updateCallback: () => safeSetState(() {}),
                   child: LabelAndContentWidget(
                     label: 'Mobile number',
-                    content: widget.mobileNumber,
+                    content: valueOrDefault<String>(
+                      widget.mobileNumber,
+                      '+94536227322',
+                    ),
                   ),
                 ),
                 wrapWithModel(
@@ -225,7 +240,10 @@ class _OngoingServiceProviderProfileWidgetState
                   updateCallback: () => safeSetState(() {}),
                   child: LabelAndContentWidget(
                     label: 'Email',
-                    content: widget.email,
+                    content: valueOrDefault<String>(
+                      widget.email,
+                      'george@gmail.com',
+                    ),
                   ),
                 ),
               ],

@@ -154,16 +154,6 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget> {
               ].divide(const SizedBox(width: 10.0)),
             ),
           ),
-          Text(
-            valueOrDefault<String>(
-              widget.serviceRequestId,
-              'requestId',
-            ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Inter',
-                  letterSpacing: 0.0,
-                ),
-          ),
         ],
       ),
     );
